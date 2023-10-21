@@ -1,4 +1,4 @@
-class CourseSection:
+class CourseSection(Course):
     """
     A class to represent a course section
 
@@ -11,13 +11,10 @@ class CourseSection:
 
     Attribute endTime (string): The end time of the section
     """
-    # HIDDEN ATTRIBUTES
-    # _sectionId (int): Unique section id
-    # _courseId (int): Associated course id
 
-    def __init__(self, roomNumber=0, instructorName="", startTime="", endTime="") -> None:
-        self._sectionId = 0
-        self._courseId = 0
+    def __init__(self, courseName="", courseId=0, sectionId=0, roomNumber=0, instructorName="", startTime="", endTime="") -> None:
+        super().__init__(self, courseName, courseId)
+        self._sectionId = sectionId
         self.roomNumber = roomNumber
         self.instructorName = instructorName
         self.startTime = startTime
@@ -35,7 +32,6 @@ class CourseSection:
         """
         Set section room number
         """
-
         self._roomNumber = roomNumber
 
     @property
@@ -81,4 +77,5 @@ class CourseSection:
         self._endTime = endTime
 
     def __str__(self) -> str:
+        super.__str__()
         return f"Room Number: {self.roomNumber}\nInstructor Name: {self.instructorName}\nStart Time: {self.startTime}\nEnd Time: {self.endTime}"
