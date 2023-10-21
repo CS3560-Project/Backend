@@ -42,3 +42,40 @@ class User:     # A class to represent a user
         # Sets a user's password
         self._password = password
 
+class UserServer:
+    """Attributes:
+    userId (int): The unique ID of the user
+    serverId (int): The unique ID of the server
+    """
+
+    def __init__(self, userId=0, serverId=0) -> None:
+        self.userId = userId
+        self.serverId = serverId
+
+    @userId.setter
+    def userId(self, userId) -> None:
+        """
+        Set a user's unique ID
+        """
+        self.userId = userId
+
+    @serverId.setter
+    def serverId(self, serverId) -> None:
+        """
+        Set a servers's unique ID
+        """
+        self.serverId = serverId
+
+    @property
+    def userId(self):
+        """
+        Return a user's unique id
+        """
+        return self.userId
+
+    @property
+    def serverId(self):
+        """
+        Set a server's unique ID
+        """
+        return self.serverId
