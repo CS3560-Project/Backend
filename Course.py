@@ -1,64 +1,35 @@
 class Course:
     """
-    A class to represent a course section
+    A class to represent a course
 
-
-    Attribute name (str): The name of the course
+    Attribute courseName (str): The courseName of the course
     Attribute courseID (int): The ID of the course
-    Attribute classCapacity (int): The capacity the class can hold
-
 
     """
-    # HIDDEN ATTRIBUTES
-    # _courseId (int): Associated course id
 
-    def __init__(self, name="", classCapacity=0) -> None:
-        self.name = name
-        self.courseId = 0
-        self.classCapacity = classCapacity
+    def __init__(self, courseName="", courseId=0) -> None:
+        self.courseName = courseName
+        self.courseId = courseId
 
-    @property
-    def name(self) -> str:
-        """
-        Returns the name of the course
-        """
-        return self.name
+    @getter
+    def courseName(self) -> str:
+        # Returns the name of the course
+        return self.courseName
 
-    @name.setter
-    def name(self, name: str) -> None:
-        """
-        Sets the name of the course
-        """
-        self.name = name
-    
-    @property
-    def courseID(self) -> str:
-        """
-        Returns the name of the course
-        """
-        return self.name
+    @setter
+    def courseName(self, courseName: str) -> None:
+        # Sets the name of the course
+        self.courseName = courseName
 
-    @name.setter
-    def courseID(self, courseID: str) -> None:
-        """
-        Sets the name of the course
-        """
-        self.courseID = courseID
+    @getter
+    def courseId(self) -> int:
+        # Returns the ID of the course
+        return self.courseId
 
-    @property
-    def classCapacity(self):
-        """
-        Returns class capacity
-        """
-        return self.classCapacity
-
-    @classCapacity.setter
-    def classCapacity(self, classCapacity: int) -> None:
-        """
-        Set class capacity
-        """
-        self.classCapacity = classCapacity
-
+    @setter
+    def courseId(self, courseId) -> None:
+        # Sets the ID of the course
+        self.courseId = courseId
 
     def __str__(self) -> str:
-        return f"Name: {self.name}\nCourse ID: {self.courseId}\nClass capacity: {self.classCapacity}\n"
+        return f"Name: {self.courseName}\nCourse ID: {self._courseId}\n"
