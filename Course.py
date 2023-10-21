@@ -3,7 +3,11 @@ class CourseSection:
     A class to represent a course section
 
 
-    Attribute roomNumber (int): The room number of the section
+    Attribute name (str): The name of the course
+    Attribute courseID (int): The ID of the course
+    Attribute classCapacity (int): The capacity the class can hold
+
+
     """
     # HIDDEN ATTRIBUTES
     # _courseId (int): Associated course id
