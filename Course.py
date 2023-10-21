@@ -11,24 +11,31 @@ class Course:
         self.courseName = courseName
         self.courseId = courseId
 
-    @getter
+    @property
     def courseName(self) -> str:
-        # Returns the name of the course
+        """
+        Returns the name of the course
+        """
         return self.courseName
 
-    @setter
+    @courseName.setter
     def courseName(self, courseName: str) -> None:
-        # Sets the name of the course
+        """
+        Sets the name of the course
+        """
         self.courseName = courseName
 
-    @getter
+    @property
     def courseId(self) -> int:
-        # Returns the ID of the course
+        """ 
+        Returns the ID of the course
+        """
         return self.courseId
-
-    @setter
-    def courseId(self, courseId) -> None:
-        # Sets the ID of the course
+    @courseId.setter
+    def courseId(self, courseId: int) -> int:
+        """
+        Returns the ID of the course
+        """
         self.courseId = courseId
 
     def __str__(self) -> str:
