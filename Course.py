@@ -14,7 +14,7 @@ class Course:
 
     def __init__(self, name="", classCapacity=0) -> None:
         self.name = name
-        self._courseId = 0
+        self.courseId = 0
         self.classCapacity = classCapacity
 
     @property
@@ -22,14 +22,28 @@ class Course:
         """
         Returns the name of the course
         """
-        return self._name
+        return self.name
 
-    @startTime.setter
+    @name.setter
     def name(self, name: str) -> None:
         """
         Sets the name of the course
         """
-        self._name = name
+        self.name = name
+    
+    @property
+    def courseID(self) -> str:
+        """
+        Returns the name of the course
+        """
+        return self.name
+
+    @name.setter
+    def courseID(self, courseID: str) -> None:
+        """
+        Sets the name of the course
+        """
+        self.courseID = courseID
 
     @property
     def classCapacity(self):
@@ -38,14 +52,13 @@ class Course:
         """
         return self.classCapacity
 
-    @roomNumber.setter
-    def classCapacity(self, roomNumber: int) -> None:
+    @classCapacity.setter
+    def classCapacity(self, classCapacity: int) -> None:
         """
         Set class capacity
         """
-
         self.classCapacity = classCapacity
 
 
     def __str__(self) -> str:
-        return f"Name: {self.name}\nCourse ID: {self._courseId}\nClass capacity: {self.classCapacity}\n"
+        return f"Name: {self.name}\nCourse ID: {self.courseId}\nClass capacity: {self.classCapacity}\n"
