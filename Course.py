@@ -1,4 +1,4 @@
-class CourseSection:
+class Course:
     """
     A class to represent a course section
 
