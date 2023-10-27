@@ -5,8 +5,8 @@ name = "pypi"
 
 [packages]
 flask = "*"
-python-dotenv = "*"
 pillow = "*"
+python-dotenv = "*"
 
 [dev-packages]
 
