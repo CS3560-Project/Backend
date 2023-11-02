@@ -9,16 +9,13 @@ load_dotenv()
 app = Flask(__name__)
 
 
-database = Database.getInstance(
-    user = os.environ.get("MYSQL_DB_USER"),
-    password= os.environ.get("MYSQL_DB_PASS"),
-    database_name=  os.environ.get("MYSQL_DB_NAME")
-)
+Database.getInstance()
 
 class Account(MethodView):
     
     
     def post(self):
+        # get the data from 
         data = request.data
         print(data)
         return jsonify("test")

@@ -1,4 +1,7 @@
 from Image import Image
+from .database import Database
+
+
 class ClassServer:
     '''
     A class to represent a ClassServer 
@@ -9,11 +12,21 @@ class ClassServer:
     '''
     # Hidden Attributes
     # serverID(int): an identifier for which server
+    
 
     def __init__(self, serverID = 0, serverName ="",profilePicture = None):
-        self.__serverID:int =serverID
-        self.serverName:str = serverName
-        self.profilePicture:Image  = profilePicture
+        data = Database.getInstance()
+        # self.__serverID:int =serverID
+        # self.serverName:str = serverName
+        # self.profilePicture:Image  = profilePicture
+        data.query(
+            """CREATE TABLE IF NOT EXIST(
+                serverID INT NOT NULL AUTO_INCREMENT,
+                serverName varchar(255) NOT NULL,
+                serverProfilePicture BLOB NOT NULL,
+                PRIMARY KEY (serverID),
+            )"""
+            )
     
     @property
     def serverName(self) -> str:
