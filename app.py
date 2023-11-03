@@ -9,7 +9,7 @@ load_dotenv()
 app = Flask(__name__)
 
 
-Database.getInstance()
+
 
 class Account(MethodView):
     

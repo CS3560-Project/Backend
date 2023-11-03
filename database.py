@@ -8,6 +8,12 @@ class Database:
     __instance = None
     
     def __init__(self,user,password, database_name,host = "localhost"):
+        '''
+            Singleton class the init method should never be called
+            any instances of this class should be called through the getInstance() method
+
+        '''
+
         if Database.__instance is not None:
             raise Exception("instance already created")
         else:
@@ -17,7 +23,24 @@ class Database:
                 password = password,
                 database = database_name,
                 host = host)
-                x = Database.query("USE cpppm;")
+                Database.query("USE cpppm;")
+                Database.query("""
+                    CREATE TABLE IF NOT EXISTS ClassServer(
+                        serverID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+                        serverName varchar(255) NOT NULL,
+                        serverProfilePicture BLOB NOT NULL
+                    );"""
+                )
+                Database.query("""
+                    CREATE TABLE IF NOT EXISTS Image(
+                        imageID int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+                        image BLOB NOT NULL,
+                        size varchar(20) NOT NULL,
+                        type varchar(10) NOT NULL
+                    );
+                """)
+
+
                 
                 
                 

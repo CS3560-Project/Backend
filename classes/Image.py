@@ -1,4 +1,4 @@
-import PIL
+from .database import Database
 class Image:
     '''
     A class to represent the Image 
@@ -12,8 +12,18 @@ class Image:
     Attribute width (int): The width, (pixels), of the image
     '''
     def __init__(self,imageLink="",size = 2048, length = 10,width =10):
-        self.image:PIL.Image.Image =  PIL.Image.open(imageLink) 
-        self.size:int = size
+        self.image:bytes =  PIL.Image.open(imageLink) # fix this later
+        self.type:str = size
         self.length:int = length
         self.width:int = width
+        
+        Database.query(
+            """
+            CREATE TABLE IF NOT EXIST Image(
+                imageID PRIMARY KEY INT AUTO_INCREMENT,
+                imageType string 
+            )
+            """
+        )
+
     

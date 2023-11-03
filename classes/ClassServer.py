@@ -15,18 +15,15 @@ class ClassServer:
     
 
     def __init__(self, serverID = 0, serverName ="",profilePicture = None):
-        data = Database.getInstance()
-        # self.__serverID:int =serverID
-        # self.serverName:str = serverName
-        # self.profilePicture:Image  = profilePicture
-        data.query(
-            """CREATE TABLE IF NOT EXIST(
-                serverID INT NOT NULL AUTO_INCREMENT,
-                serverName varchar(255) NOT NULL,
-                serverProfilePicture BLOB NOT NULL,
-                PRIMARY KEY (serverID),
-            )"""
-            )
+        
+        self.__serverID:int =serverID
+        self.serverName:str = serverName
+        self.profilePicture:Image  = profilePicture
+        
+    
+    # def createEntry(self, serverName,profilePicture = None):
+        
+
     
     @property
     def serverName(self) -> str:
@@ -52,4 +49,5 @@ class ClassServer:
         changes the value of the attribute profielPicture
         '''
         self.profilePicture = profilePicture
-
+    
+        
