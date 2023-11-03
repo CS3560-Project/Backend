@@ -1,3 +1,6 @@
+[scripts]
+app = 'flask run'
+
 [[source]]
 url = "https://pypi.org/simple"
 verify_ssl = true
@@ -6,6 +9,12 @@ name = "pypi"
 [packages]
 flask = "*"
 python-dotenv = "*"
+mysqlclient = "*"
+flask-mysqldb = "*"
+"flask.views" = "*"
+flask-bcrypt = "*"
+mysql-connector = "*"
+mysql-connector-python = "*"
 pillow = "*"
 
 [dev-packages]

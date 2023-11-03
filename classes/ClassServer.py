@@ -1,4 +1,7 @@
 from Image import Image
+from .database import Database
+
+
 class ClassServer:
     '''
     A class to represent a ClassServer 
@@ -9,11 +12,18 @@ class ClassServer:
     '''
     # Hidden Attributes
     # serverID(int): an identifier for which server
+    
 
     def __init__(self, serverID = 0, serverName ="",profilePicture = None):
+        
         self.__serverID:int =serverID
         self.serverName:str = serverName
         self.profilePicture:Image  = profilePicture
+        
+    
+    # def createEntry(self, serverName,profilePicture = None):
+        
+
     
     @property
     def serverName(self) -> str:
@@ -39,4 +49,5 @@ class ClassServer:
         changes the value of the attribute profielPicture
         '''
         self.profilePicture = profilePicture
-
+    
+        
