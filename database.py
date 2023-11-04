@@ -7,7 +7,7 @@ load_dotenv()
 class Database:
     __instance = None
     
-    def __init__(self,user,password,host = "localhost"):
+    def __init__(self,user,password, database_name,host = "localhost"):
         '''
             Singleton class the init method should never be called
             any instances of this class should be called through the getInstance() method
@@ -21,11 +21,9 @@ class Database:
                 
                 Database.__instance = mysql.connector.connect(user = user,
                 password = password,
-                
+                database = database_name,
                 host = host)
-                Database.query("CREATE DATABASE IF NOT EXISTS cpppm;")
                 Database.query("USE cpppm;")
-
                 Database.query("""
                     CREATE TABLE IF NOT EXISTS ClassServer(
                         serverID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -41,7 +39,14 @@ class Database:
                         type varchar(10) NOT NULL
                     );
                 """)
-
+                Database.query("""
+                    CREATE TABLE IF NOT EXISTS User(
+                        userID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+                        userName VARCHAR(255) NOT NULL,
+                        email VARCHAR(255) NOT NULL,
+                        password VARCHAR(255) NOT NULL
+                    );
+                """)
 
 
                 
@@ -73,5 +78,5 @@ class Database:
 database = Database.getInstance(
     user = os.environ.get("MYSQL_DB_USER"),
     password= os.environ.get("MYSQL_DB_PASS"),
-    
+    database_name=  os.environ.get("MYSQL_DB_NAME")
 )
