@@ -39,7 +39,15 @@ class Database:
                         type varchar(10) NOT NULL
                     );
                 """)
-
+                Database.query("""
+                    CREATE TABLE IF NOT EXISTS User(
+                        userID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+                        userName varchar(255) NOT NULL,
+                        userEmail varchar(255) NOT NULL
+                        userPassword varchar(255) NOT NULL
+                        userProfilePicture BLOB NOT NULL
+                    );
+                """)
 
                 
                 
