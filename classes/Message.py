@@ -29,6 +29,13 @@ class Message:
         self.edited:bool = False
         self.sentDate:str = sentDate
         
+    Database.query("""
+    CREATE TABLE IF NOT EXISTS Channel(
+        messageID INT PRIMARY KEY NOT NULL AUTO_INCREMENT
+        channelID INT FOREIGN KEY NOT NULL,
+    );
+""")
+
     @property
     def message(self)-> str:
         # returns the message 
