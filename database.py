@@ -48,7 +48,12 @@ class Database:
                         userProfilePicture BLOB NOT NULL
                     );
                 """)
-
+                Database.query("""
+                    CREATE TABLE IF NOT EXISTS UserServers(
+                        userServersUserID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+                        userServersServerID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+                    );
+                """)
                 
                 
                 
