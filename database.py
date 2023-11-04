@@ -40,13 +40,13 @@ class Database:
                     );
                 """)
                 Database.query("""
-            CREATE TABLE IF NOT EXISTS User(
-                userID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-                userName VARCHAR(255) NOT NULL,
-                email VARCHAR(255) NOT NULL,
-                password VARCHAR(255) NOT NULL
-            );
-            """)
+                    CREATE TABLE IF NOT EXISTS User(
+                        userID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+                        userName VARCHAR(255) NOT NULL,
+                        email VARCHAR(255) NOT NULL,
+                        password VARCHAR(255) NOT NULL
+                    );
+                """)
 
 
                 
