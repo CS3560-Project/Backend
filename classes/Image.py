@@ -17,13 +17,6 @@ class Image:
         self.length:int = length
         self.width:int = width
         
-        Database.query(
-            """
-            CREATE TABLE IF NOT EXIST Image(
-                imageID PRIMARY KEY INT AUTO_INCREMENT,
-                imageType string 
-            )
-            """
-        )
+        
 
     

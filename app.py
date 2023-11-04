@@ -1,11 +1,10 @@
 from flask import Flask, jsonify,request
 from database import Database
 from flask.views import MethodView
-
 from dotenv import load_dotenv
 import os
-
 load_dotenv()
+
 app = Flask(__name__)
 
 
@@ -19,6 +18,7 @@ class Account(MethodView):
         data = request.data
         print(data)
         return jsonify("test")
+        # how are we sending status code
     def get(self):
         # global database
         
