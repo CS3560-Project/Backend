@@ -8,11 +8,11 @@ class User:     # A class to represent a user
     [HIDDEN] _password (str): The password to the user's account
     """
 
-    def __init__(self, userId=0, userName="", email="", _password="") -> None:
-        self.userId = userId
+    def __init__(self, userName="", email="", password="") -> None:
+        
         self.userName = userName
         self.email = email
-        self._password = _password
+        self.password = password
 
     def userId(self, userId) -> None:
         # Sets a user's unique ID
@@ -79,3 +79,6 @@ class UserServer:
         Set a server's unique ID
         """
         return self.serverId
+
+
+
