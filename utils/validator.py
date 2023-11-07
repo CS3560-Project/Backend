@@ -17,7 +17,7 @@ def validate_input(input_field,required_field,is_body = True):
         if is_body:
             raise MissingArgumentException(missing_body_parts=missing)
         else:
-            raise MissingParameterException
+            raise MissingParameterException(missing_param= missing)
     return True
             
     

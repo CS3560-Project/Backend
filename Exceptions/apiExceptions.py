@@ -7,7 +7,7 @@ class MissingArgumentException(baseException):
     def __init__(self,missing_body_parts= None):
         if missing_body_parts:
             
-            super().__init__(f"Missing {','.join([parts for parts in missing_body_parts])}")
+            super().__init__(f"Missing {','.join([parts for parts in missing_body_parts])} in body")
 
 class MissingParameterException(Exception):
     # this should be used exclusively for get methods (or any that passes through the params)
@@ -16,4 +16,4 @@ class MissingParameterException(Exception):
     def __init__(self,missing_param= None):
         if missing_params:
             
-            super().__init__(f"Missing {','.join([params for params in missing_params])}")
+            super().__init__(f"Missing {','.join([params for params in missing_params])} in parameter")
