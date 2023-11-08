@@ -94,9 +94,10 @@ class Database:
         Database.__instance.close()
 
     @classmethod
-    def query(cls, query, data=None, isMulti=False):
+    def query(cls, querys, data=None, isMulti=False):
+
         cursor = cls.__instance.cursor()
-        value = cursor.execute(query, params=None, multi=isMulti)
+        value = cursor.execute(querys, params=data, multi=isMulti)
 
         cursor.close()
         Database.__instance.commit()

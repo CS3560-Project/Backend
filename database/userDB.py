@@ -1,12 +1,19 @@
 from .database import Database
 class User:
-    instance = Database.getInstance()
     
-    @classmethod
-    def createAccount(cls,username,email, password):
-        cls.instance.query(
+
+    @staticmethod
+    def createAccount(username,email, password,image):
+        # print(cls.instance)
+        value = Database.query(
             """
-            INSERT INTO account(username,email,password)
-            VALUES (%s,)
-            """
+            INSERT INTO user(username,useremail,userpassword,userProfilePicture)
+            VALUES (%s,%s,%s,%s)
+            """,
+            (username,email,password,image)
             )
+        return value
+    @staticmethod
+    def getAccount(email, userID = None):
+        pass
+    
