@@ -3,7 +3,7 @@ from .database import Database
 
 class Channel:
     def __init__(self,channelName = "",channelID = 0):
-        self.channelID:int = channelID
+        self.__channelID:int = channelID
         self.channelName:str = channelName  
     @property
     def channelName(self) -> str:
