@@ -1,30 +1,18 @@
 from flask import Flask, jsonify,request
-from database import Database
-from flask.views import MethodView
+
+
 from dotenv import load_dotenv
 import os
-load_dotenv()
+from views.Account import Account
 
+
+load_dotenv()
 app = Flask(__name__)
 
 
 
 
-class Account(MethodView):
-    
-    
-    def post(self):
-        # get the data from 
-        data = request.data
-        print(data)
-        return jsonify("test")
-        # how are we sending status code
-    def get(self):
-        # global database
-        
-        data = request.args
-        
-        return jsonify(data)
 
-acc = Account.as_view('acc')
-app.add_url_rule('/main/', view_func = acc)
+
+app.add_url_rule('/account/', view_func = Account.as_view('acc'))
+# app.add_url_rule('/image/',view_func = Image.as_view('image'))
