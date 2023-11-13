@@ -16,6 +16,7 @@ flask-bcrypt = "*"
 mysql-connector = "*"
 mysql-connector-python = "*"
 pillow = "*"
+flask-socketio = "*"
 
 [dev-packages]
 
