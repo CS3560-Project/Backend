@@ -1,4 +1,5 @@
-from flask import jsonify,request
+from flask import jsonify,request,make_response,send_file
+import io
 import json
 from utils.validator import validate_input
 from Exceptions.apiExceptions import *
@@ -37,11 +38,23 @@ class Account(MethodView):
     def get(self):
         data = request.args.get("email")
         # implement a check on required arguments (when using validator function make sure is_body  is false to ensure correct error is sent)
-        print(data)
-        return jsonify("implement account get endpoint"),501
+        db_val = User.getAccount(email=data)
+        
+        for i in db_val:
+            print(i)
+        # return send_file(
+        #     io.BytesIO(image_bytes),
+        #     download_name='logo.png',
+        #     mimetype='image/png'
+        # )
+        return "test"
     def patch(self):
         # changes the account
         data = json.loads(request.data.decode('utf-8'))
         # impelemt a check onr equired argeuments
         return jsonify("implement accoutn patch endpoint"),501
        
+    def delete(self):
+        email = request.args.get("email")
+        User.deteleteAccount(email=email)
+        return jsonify("taks completed")

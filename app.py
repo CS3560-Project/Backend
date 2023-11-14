@@ -10,6 +10,7 @@ app = Flask(__name__)
 socket = SocketIO(app,logger=True, engineio_logger=True)
 
 
+
 @socket.on('connect')
 def test_connect():
     emit('after connect',  {'data':'Lets dance'})

@@ -94,10 +94,14 @@ class Database:
         Database.__instance.close()
 
     @classmethod
-    def query(cls, querys, data=None, isMulti=False):
+    def query(cls, querys, data=None, isMulti=False, fetchVal = False):
 
-        cursor = cls.__instance.cursor()
-        value = cursor.execute(querys, params=data, multi=isMulti)
+        cursor = cls.__instance.cursor(buffered = True)
+        cursor.execute(querys, params=data, multi=isMulti)
+        value = None
+        if fetchVal:
+            # print('here')
+            value = cursor.fetchall()
 
         cursor.close()
         Database.__instance.commit()

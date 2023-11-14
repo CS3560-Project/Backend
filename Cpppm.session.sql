@@ -2,4 +2,4 @@ INSERT INTO user(username,useremail,userpassword)
 VALUES ('test','test','test')
 
 -- @block
-SELECT * FROM user;
+SELECT * FROM user where useremail = "tt@cpp.edu";

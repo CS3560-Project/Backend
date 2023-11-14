@@ -15,5 +15,23 @@ class User:
         return value
     @staticmethod
     def getAccount(email, userID = None):
-        pass
+        value = Database.query(
+            """
+            SELECT * FROM user where useremail = %s;
+            """,
+            (email,),
+            fetchVal = True
+        )
+        return value
+    @staticmethod
+    def deteleteAccount(email, userID =None):
+        value = Database.query(
+            """
+            DELETE FROM user where useremail = %s;
+            """,
+            (email,)
+        )
+    # @staticmethod
+    # def changeAccount(email, username,password, userID = None ):
+    #     if userID 
     
