@@ -1,5 +1,5 @@
 from .database import Database
 
-class Image():
+class Course():
     # implement crud operation here
     pass

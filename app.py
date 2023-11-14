@@ -7,7 +7,7 @@ from views.Account import Account
 
 load_dotenv()
 app = Flask(__name__)
-socket = SocketIO(app)
+socket = SocketIO(app,logger=True, engineio_logger=True)
 
 
 @socket.on('connect')

@@ -34,4 +34,14 @@ class Account(MethodView):
         
 
         return jsonify({"success":"created"}),201
+    def get(self):
+        data = request.args.get("email")
+        # implement a check on required arguments (when using validator function make sure is_body  is false to ensure correct error is sent)
+        print(data)
+        return jsonify("implement account get endpoint"),501
+    def patch(self):
+        # changes the account
+        data = json.loads(request.data.decode('utf-8'))
+        # impelemt a check onr equired argeuments
+        return jsonify("implement accoutn patch endpoint"),501
        
