@@ -1,5 +1,5 @@
 from Image import Image
-from .database import Database
+from database import database
 
 
 class ClassServer:

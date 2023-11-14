@@ -1,5 +1,5 @@
-import Image.Image
-import User.User
+from Image import Image
+from User import User
 class Message:
 
     """
@@ -20,7 +20,7 @@ class Message:
     # __messageID(int) : an identifier for the message
 
     def __init__(self,messageId,message,sender,sentDate,channelID,images):
-        self.__messageID:int = messageID
+        self.__messageId:int = messageId
         self.message:str = message
         self.sender:User = sender
         self.channelID:int = channelID

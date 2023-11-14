@@ -1,5 +1,5 @@
 from PIL import Image as PILImage
-from .database import Database
+from database import database
 
 class Image:
     '''
@@ -19,7 +19,7 @@ class Image:
         self._length: int = length
         self._width: int = width
         
-        Database.query(
+        database.query(
             """
             CREATE TABLE IF NOT EXISTS Image(
                 imageID INT PRIMARY KEY AUTO_INCREMENT,
