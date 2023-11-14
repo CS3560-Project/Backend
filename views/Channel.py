@@ -22,8 +22,5 @@ class ChannelView(MethodView):
             
             return jsonify({"error": e.message}), e.error_code
         
-        # create a new channel
-        channel = Channel(data["channelName"])
-        # You can save the channel to the database here if needed
-        
+
         return jsonify({"success": "created", "channelID": channel.channelID}), 201
