@@ -14,28 +14,12 @@ class CourseSection(Course):
     Attribute endTime (string): The end time of the section
     """
 
-    def __init__(self, courseName="", courseId="", sectionId=0, roomNumber="", classCapacity=0, instructorName="", startTime="", endTime="") -> None:
+    def __init__(self, courseName="", courseId="", sectionId=0, roomNumber="", classCapacity=0, instructorName="") -> None:
         super().__init__(self, courseName, courseId)
         self._sectionId = sectionId
         self.roomNumber = roomNumber
         self.classCapacity = classCapacity
         self.instructorName = instructorName
-        self.startTime = startTime
-        self.endTime = endTime
-
-    @property
-    def roomNumber(self) -> str:
-        """
-        Returns room information class based on room number
-        """
-        return self.roomNumber
-
-    @roomNumber.setter
-    def roomNumber(self, roomNumber: str) -> None:
-        """
-        Set section room number
-        """
-        self.roomNumber = roomNumber
 
     @property
     def classCapacity(self) -> int:
@@ -65,34 +49,6 @@ class CourseSection(Course):
         """
         self.instructorName = instructorName
 
-    @property
-    def startTime(self) -> str:
-        """
-        Returns section start time
-        """
-        return self.startTime
-
-    @startTime.setter
-    def startTime(self, startTime: str) -> None:
-        """
-        Set section start time
-        """
-        self.startTime = startTime
-
-    @property
-    def endTime(self) -> str:
-        """
-        Returns section end time
-        """
-        return self.endTime
-
-    @endTime.setter
-    def endTime(self, endTime: str) -> None:
-        """
-        Set section end time
-        """
-        self.endTime = endTime
-
     def __str__(self) -> str:
         super.__str__()
-        return f"Room Number: {self.roomNumber}\nInstructor Name: {self.instructorName}\nStart Time: {self.startTime}\nEnd Time: {self.endTime}"
+        return f"Section Number:{self._sectionId}\nInstructor Name: {self.instructorName}"
