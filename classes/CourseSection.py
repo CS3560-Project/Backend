@@ -14,7 +14,7 @@ class CourseSection(Course):
     Attribute endTime (string): The end time of the section
     """
 
-    def __init__(self, courseName="", courseId=0, sectionId=0, roomNumber=0, classCapacity=0, instructorName="", startTime="", endTime="") -> None:
+    def __init__(self, courseName="", courseId="", sectionId=0, roomNumber="", classCapacity=0, instructorName="", startTime="", endTime="") -> None:
         super().__init__(self, courseName, courseId)
         self._sectionId = sectionId
         self.roomNumber = roomNumber
@@ -24,14 +24,14 @@ class CourseSection(Course):
         self.endTime = endTime
 
     @property
-    def roomNumber(self):
+    def roomNumber(self) -> str:
         """
         Returns room information class based on room number
         """
         return self.roomNumber
 
     @roomNumber.setter
-    def roomNumber(self, roomNumber: int) -> None:
+    def roomNumber(self, roomNumber: str) -> None:
         """
         Set section room number
         """
@@ -45,7 +45,7 @@ class CourseSection(Course):
         return self.classCapacity
 
     @classCapacity.setter
-    def classCapacity(self, classCapacity: str) -> None:
+    def classCapacity(self, classCapacity: int) -> None:
         """
         Set section instructor name
         """

@@ -94,7 +94,7 @@ class Database:
                         instructorName varchar(255) NOT NULL,
                         startTime varchar(15) NOT NULL,
                         endTime varchar(15) NOT NULL,
-                        PRIMARY KEY (courseId, sectionId)
+                        PRIMARY KEY (courseId, sectionId),
                         FOREIGN KEY (courseId) REFERENCES COURSE(courseId) ON DELETE CASCADE
                     );
                 """)
