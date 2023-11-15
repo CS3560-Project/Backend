@@ -9,3 +9,5 @@ from flask.views import MethodView
 #         data = json.loads(request.data.decode('utf-8'))
 #         required_field = []
 #         try
+#     def get(self):
+        
