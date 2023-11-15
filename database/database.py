@@ -78,7 +78,33 @@ class Database:
                         FOREIGN KEY (imageID) REFERENCES Image(imageID) ON DELETE CASCADE
                     );
                 """)
-
+                Database.query("""
+                    CREATE TABLE IF NOT EXISTS Course(
+                        courseId varchar(10) NOT NULL,
+                        courseName varchar(255) NOT NULL,
+                        PRIMARY KEY (courseId)
+                    );
+                """)
+                Database.query("""
+                    CREATE TABLE IF NOT EXISTS CourseSection(
+                        sectionId INT NOT NULL,
+                        courseId varchar(10) NOT NULL
+                        classCapacity INT NOT NULL,
+                        roomNumber varchar(10) NOT NULL,
+                        instructorName varchar(255) NOT NULL,
+                        startTime varchar(15) NOT NULL,
+                        endTime varchar(15) NOT NULL,
+                        PRIMARY KEY (courseId, sectionId)
+                        FOREIGN KEY (courseId) REFERENCES COURSE(courseId) ON DELETE CASCADE
+                    );
+                """)
+                Database.query("""
+                    CREATE TABLE IF NOT EXISTS Channel(
+                        channelId INT NOT NULL,
+                        channelName varchar(255) NOT NULL,
+                        PRIMARY KEY (channelId)
+                    );
+                """)
             except Error as e:
                 print(e)
 
