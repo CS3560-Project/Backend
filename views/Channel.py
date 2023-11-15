@@ -23,6 +23,7 @@ class Channel(MethodView):
     def patch(self):
         data = json.loads(request.data.decode('utf-8'))
         # impelemt a check onr equired argeuments
+        
         return jsonify("implement Channel set endpoint")
     
        

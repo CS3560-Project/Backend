@@ -42,19 +42,27 @@ class Account(MethodView):
         
         for i in db_val:
             print(i)
-        # return send_file(
-        #     io.BytesIO(image_bytes),
-        #     download_name='logo.png',
-        #     mimetype='image/png'
-        # )
-        return "test"
+        return send_file(
+            io.BytesIO(image_bytes),
+            download_name='logo.png',
+            mimetype='image/png'
+        )
+        # return "test"
     def patch(self):
         # changes the account
         data = json.loads(request.data.decode('utf-8'))
-        # impelemt a check onr equired argeuments
-        return jsonify("implement accoutn patch endpoint"),501
+        required_field = ["email","username","password"]
+        try:
+            validate_input(data.keys(), required_field)
+
+        except MissingArgumentException as e:
+            
+            return jsonify({"error":e.message}),e.error_code
+        User.changeAccount(data.get("email"),data.get("username"),data.get("password"))
+        
+        return jsonify(f"{data.get('email')} changed"),200
        
     def delete(self):
         email = request.args.get("email")
         User.deteleteAccount(email=email)
-        return jsonify("taks completed")
+        return jsonify("account deleted")
