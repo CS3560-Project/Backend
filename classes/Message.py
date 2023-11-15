@@ -1,5 +1,6 @@
 from Image import Image
 from User import User
+
 class Message:
 
     """
@@ -33,11 +34,11 @@ class Message:
         # returns the message 
         return self.message
     @message.setter
-    def message(self,message:str):
+    def message(self,message:str) -> None:
         # changes a specific message
         self.message = message
     @property
-    def sender(self)->User:
+    def sender(self) -> User:
         # returns the user who sent the message
         # a seter method is not needded as the user will never change
         return self.sender

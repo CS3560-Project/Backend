@@ -7,7 +7,7 @@ class Course:
 
     """
 
-    def __init__(self, courseName="", courseId=0) -> None:
+    def __init__(self, courseName="", courseId="") -> None:
         self.courseName = courseName
         self.courseId = courseId
 
@@ -26,13 +26,13 @@ class Course:
         self.courseName = courseName
 
     @property
-    def courseId(self) -> int:
+    def courseId(self) -> str:
         """ 
         Returns the ID of the course
         """
         return self.courseId
     @courseId.setter
-    def courseId(self, courseId: int) -> int:
+    def courseId(self, courseId: str) -> None:
         """
         Returns the ID of the course
         """
