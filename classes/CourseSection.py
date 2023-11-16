@@ -1,3 +1,5 @@
+from Course import Course
+
 class CourseSection(Course):
     """
     A class to represent a course section
@@ -43,7 +45,7 @@ class CourseSection(Course):
         return self.classCapacity
 
     @classCapacity.setter
-    def instructorName(self, instructorName: str) -> None:
+    def classCapacity(self, classCapacity: str) -> None:
         """
         Set section instructor name
         """

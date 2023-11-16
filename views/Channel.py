@@ -4,26 +4,23 @@ from utils.validator import validate_input
 from Exceptions.apiExceptions import *
 from flask.views import MethodView
 
-from database.userDB import User
-import os
-class Channel(MethodView):
-    
-    
+from Message import Message
+from database.channelDB import Channel  # Assuming you have a channel database module
+
+class ChannelView(MethodView):
+
     def post(self):
-        # gets the data from body
+        # get the data from the request
+        required_fields = ["channelName"]
+        
         data = json.loads(request.data.decode('utf-8'))
+        
+        try:
+            validate_input(data.keys(), required_fields)
+
+        except MissingArgumentException as e:
+            
+            return jsonify({"error": e.message}), e.error_code
         
 
-        return jsonify("implement post endpoint for channel"),501
-    def get(self):
-        data = request.args.get("email")
-        # implement a check on required arguments (when using validator function make sure is_body  is false to ensure correct error is sent)
-        print(data)
-        return jsonify("implement Channel get endpoint")
-    def patch(self):
-        data = json.loads(request.data.decode('utf-8'))
-        # impelemt a check onr equired argeuments
-        
-        return jsonify("implement Channel set endpoint")
-    
-       
+        return jsonify({"success": "created", "channelID": channel.channelID}), 201
