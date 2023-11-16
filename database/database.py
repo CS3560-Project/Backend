@@ -25,29 +25,34 @@ class Database:
                                                               password=password,
 
                                                               host=host)
+                Database.query("DROP DATABASE cpppm;")
                 Database.query("CREATE DATABASE IF NOT EXISTS cpppm;")
                 Database.query("USE cpppm;")
+                
+                Database.query("""
+                    CREATE TABLE IF NOT EXISTS Image(
+                        imageID int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+                        
+                        image BLOB NOT NULL,
+                        imageType VARCHAR(10) NOT NULL
+                        
+                    );
+                """)
                 Database.query("""
                     CREATE TABLE IF NOT EXISTS ClassServer(
                         serverID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
                         serverName varchar(255) NOT NULL,
-                        serverProfilePicture BLOB NOT NULL
+                        profilePictureID INT NOT NULL,
+                        FOREIGN KEY (profilePictureID) references Image(imageID) ON DELETE CASCADE
                     );""")
-                Database.query("""
-                    CREATE TABLE IF NOT EXISTS Image(
-                        imageID int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-                        image BLOB NOT NULL,
-                        size varchar(20) NOT NULL,
-                        type varchar(10) NOT NULL
-                    );
-                """)
                 Database.query("""
                     CREATE TABLE IF NOT EXISTS User(
                         userID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
                         userName varchar(255) NOT NULL,
-                        userEmail varchar(255) NOT NULL,
-                        userPassword varchar(255) NOT NULL,
-                        userProfilePicture BLOB NOT NULL
+                        email varchar(255) UNIQUE NOT NULL,
+                        password varchar(255) NOT NULL,
+                        profilePictureID int NOT NULL,
+                        FOREIGN KEY (profilePictureID) references Image(imageID) ON DELETE CASCADE
                     );
                 """)
                 Database.query("""
@@ -117,10 +122,14 @@ class Database:
         Database.__instance.close()
 
     @classmethod
-    def query(cls, querys, data=None, isMulti=False):
+    def query(cls, querys, data=None, isMulti=False, fetchVal = False):
 
-        cursor = cls.__instance.cursor()
-        value = cursor.execute(querys, params=data, multi=isMulti)
+        cursor = cls.__instance.cursor(buffered = True)
+        cursor.execute(querys, params=data, multi=isMulti)
+        value = None
+        if fetchVal:
+            # print('here')
+            value = cursor.fetchall()
 
         cursor.close()
         Database.__instance.commit()

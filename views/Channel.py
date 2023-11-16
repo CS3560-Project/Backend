@@ -1,4 +1,4 @@
-from flask import jsonify, request
+from flask import jsonify,request
 import json
 from utils.validator import validate_input
 from Exceptions.apiExceptions import *
