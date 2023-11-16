@@ -7,7 +7,7 @@ class User:
         # print(cls.instance)
         value = Database.query(
             """
-            INSERT INTO user(username,useremail,userpassword,userProfilePicture)
+            INSERT INTO user(username,email,password,profilePictureID)
             VALUES (%s,%s,%s,%s)
             """,
             (username,email,password,image)
@@ -17,7 +17,7 @@ class User:
     def getAccount(email, userID = None):
         value = Database.query(
             """
-            SELECT * FROM user where useremail = %s;
+            SELECT * FROM user where email = %s;
             """,
             (email,),
             fetchVal = True
@@ -27,7 +27,7 @@ class User:
     def deteleteAccount(email, userID =None):
         value = Database.query(
             """
-            DELETE FROM user where useremail = %s;
+            DELETE FROM user where email = %s;
             """,
             (email,)
         )
@@ -38,10 +38,10 @@ class User:
             UPDATE user
             SET
                 
-                userPassword =%s,
+                password =%s,
                 username = %s
             WHERE 
-                useremail = %s
+                email = %s
             """,
             (username,password,email)
         )

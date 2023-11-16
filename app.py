@@ -3,6 +3,7 @@ from flask_socketio import SocketIO, emit
 from dotenv import load_dotenv
 import os
 from views.Account import Account
+from views.Image import Image
 
 
 load_dotenv()
@@ -17,4 +18,4 @@ def test_connect():
 
 
 app.add_url_rule('/account/', view_func = Account.as_view('acc'))
-# app.add_url_rule('/image/',view_func = Image.as_view('image'))
+app.add_url_rule('/image/',view_func = Image.as_view('image'))
