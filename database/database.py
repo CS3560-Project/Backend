@@ -93,7 +93,7 @@ class Database:
                 Database.query("""
                     CREATE TABLE IF NOT EXISTS CourseSection(
                         sectionId INT NOT NULL,
-                        courseId varchar(10) NOT NULL
+                        courseId varchar(10) NOT NULL,
                         classCapacity INT NOT NULL,
                         instructorName varchar(255) NOT NULL,
                         PRIMARY KEY (courseId, sectionId),
@@ -122,19 +122,24 @@ class Database:
         Database.__instance.close()
 
     @classmethod
-    def query(cls, querys, data=None, isMulti=False, fetchVal = False):
 
-        cursor = cls.__instance.cursor(buffered = True)
+    def query(cls, querys, data=None, isMulti=False, fetchVal = False,getID= False,isDictionary = False):
+        """
+            Use fetchVal if you want to geet the result
+            use getID to get the previous value id of the insert
+        """
+        cursor = cls.__instance.cursor(dictionary = isDictionary,buffered = True)
         cursor.execute(querys, params=data, multi=isMulti)
         value = None
         if fetchVal:
             # print('here')
             value = cursor.fetchall()
-
+        if getID:
+            value = cursor.lastrowid 
         cursor.close()
         Database.__instance.commit()
         return value
-
+    
 
 database = Database.getInstance(
     user=os.environ.get("MYSQL_DB_USER"),

@@ -3,14 +3,15 @@ class User:
     
 
     @staticmethod
-    def createAccount(username,email, password,image):
+    def createAccount(username,email, password,imageID):
         # print(cls.instance)
         value = Database.query(
             """
             INSERT INTO user(username,email,password,profilePictureID)
             VALUES (%s,%s,%s,%s)
             """,
-            (username,email,password,image)
+            (username,email,password,imageID),
+            getID = True
             )
         return value
     @staticmethod
@@ -20,6 +21,7 @@ class User:
             SELECT * FROM user where email = %s;
             """,
             (email,),
+            isDictionary = True,
             fetchVal = True
         )
         return value

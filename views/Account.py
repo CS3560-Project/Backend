@@ -6,6 +6,7 @@ from Exceptions.apiExceptions import *
 from flask.views import MethodView
 
 from database.userDB import User
+from database.imageDB import Image
 import os
 class Account(MethodView):
     
@@ -30,24 +31,25 @@ class Account(MethodView):
         else:
             #implement image here if they do put an image
             pass
-        
-        User.createAccount(data["username"],data["email"],data["password"],image )
+        imageID = Image.store_image(image)
+
+        userID = User.createAccount(data["username"],data["email"],data["password"],imageID )
         
 
-        return jsonify({"success":"created"}),201
+        return jsonify({"userID":userID}),201
     def get(self):
         data = request.args.get("email")
         # implement a check on required arguments (when using validator function make sure is_body  is false to ensure correct error is sent)
-        db_val = User.getAccount(email=data)
+        db_val = User.getAccount(email=data)[0]
         
-        for i in db_val:
-            print(i)
-        return send_file(
-            io.BytesIO(image_bytes),
-            download_name='logo.png',
-            mimetype='image/png'
-        )
-        # return "test"
+        
+        return jsonify({
+            "userID":db_val["userID"],
+            "userName":db_val["userName"],
+            "password":db_val["password"],
+            "imageID":db_val["profilePictureID"]
+        })
+        
     def patch(self):
         # changes the account
         data = json.loads(request.data.decode('utf-8'))
@@ -63,6 +65,6 @@ class Account(MethodView):
         return jsonify(f"{data.get('email')} changed"),200
        
     def delete(self):
-        email = request.args.get("email")
-        User.deteleteAccount(email=email)
-        return jsonify("account deleted")
+            email = request.args.get("email")
+            User.deteleteAccount(email=email)
+            return jsonify("account deleted")
