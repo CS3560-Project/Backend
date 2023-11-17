@@ -1,7 +1,11 @@
 from flask import jsonify, request
 from flask.views import MethodView
-from database.ClassServer import ClassServer
+import json
+from utils.validator import validate_input
 from Exceptions.apiExceptions import MissingArgumentException
+from database.ClassServer import ClassServer
+from database.imageDB import Image
+import os
 
 class ClassServerView(MethodView):
     def post(self):
@@ -15,7 +19,13 @@ class ClassServerView(MethodView):
             return jsonify({"error": e.message}), e.error_code
 
         server_name = data["serverName"]
-        server_profile_picture = b''
+        
+        if "image" not in data.keys():
+            #Default image should be set later
+            with open(os.path.join(os.getcwd(), "image", "serverProfiles", "default_image.jpg"), "rb") as file:
+                server_profile_picture = file.read()
+        else:
+            pass
 
         server_id = ClassServer.createClassServer(server_name, server_profile_picture)
 
