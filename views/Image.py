@@ -11,9 +11,9 @@ class Image(MethodView):
     def post(self):
         photo_byte = request.data
         
-        img_type = Img.open(BytesIO(photo_byte)).format.lower()
         
-        imageDB.Image.store_image(photo_byte,img_type)
+        
+        imageDB.Image.store_image(photo_byte)
         return jsonify("created"),201
     def get(self):
         # make error handler for thewse
