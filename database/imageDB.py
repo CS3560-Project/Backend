@@ -5,8 +5,9 @@ class Image:
     # implement crud operation here
     @staticmethod
     def store_image(img):
+        img_byte = BytesIO(img)
+        img_type = Img.open(img_byte).format
         
-        img_type = Img.open(BytesIO(img)).format.lower()
         imageID = Database.query(
             """
                 INSERT INTO IMAGE(image,imageType)

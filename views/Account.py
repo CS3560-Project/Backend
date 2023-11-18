@@ -15,8 +15,11 @@ class Account(MethodView):
         # get the data from 
         
         required_field = ["username","password","email"]
+        # data = request.files
+        data = json.loads(request.data.decode("utf-8"))
+        # print(data.get("file  "))
         
-        data = json.loads(request.data.decode('utf-8'))
+
         
         try:
             validate_input(data.keys(), required_field)
@@ -24,13 +27,18 @@ class Account(MethodView):
         except MissingArgumentException as e:
             
             return jsonify({"error":e.message}),e.error_code
-        if "image" not in data.keys():
+        if "profile" not in data.keys():
             with open(os.path.join(os.getcwd(),"image","userProfiles","download.jpg"),"rb") as file:
                 image = file.read()
-            
+
+                
+                
+                
         else:
-            #implement image here if they do put an image
-            pass
+            image = bytes(data["profile"],"utf-16")
+            
+        print(image)
+        return "test"
         imageID = Image.store_image(image)
 
         userID = User.createAccount(data["username"],data["email"],data["password"],imageID )
@@ -40,9 +48,11 @@ class Account(MethodView):
     def get(self):
         data = request.args.get("email")
         # implement a check on required arguments (when using validator function make sure is_body  is false to ensure correct error is sent)
-        db_val = User.getAccount(email=data)[0]
         
-        
+        db_val = User.getAccount(email=data)
+        if len(db_val) == 0 :
+            return jsonify({"error": f"no account associated with {data}"}),404
+        db_val = db_val[0]
         return jsonify({
             "userID":db_val["userID"],
             "userName":db_val["userName"],
