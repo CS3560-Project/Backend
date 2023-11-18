@@ -37,8 +37,7 @@ class Account(MethodView):
         else:
             image = bytes(data["profile"],"utf-16")
             
-        print(image)
-        return "test"
+        
         imageID = Image.store_image(image)
 
         userID = User.createAccount(data["username"],data["email"],data["password"],imageID )
