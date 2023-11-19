@@ -1,6 +1,8 @@
 from .database import Database
 from PIL import Image as Img
 from io import BytesIO
+from PIL import Image as Img
+from io import BytesIO
 class Image:
     # implement crud operation here
     @staticmethod

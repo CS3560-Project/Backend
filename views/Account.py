@@ -7,6 +7,7 @@ from flask.views import MethodView
 import base64
 from database.userDB import User
 from database.imageDB import Image
+from database.imageDB import Image
 import os
 class Account(MethodView):
     
@@ -43,6 +44,7 @@ class Account(MethodView):
         userID = User.createAccount(data["username"],data["email"],data["password"],imageID )
         
 
+        return jsonify({"userID":userID}),201
         return jsonify({"userID":userID}),201
     def get(self):
         data = request.args.get("email")
