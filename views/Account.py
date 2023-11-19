@@ -4,7 +4,7 @@ import json
 from utils.validator import validate_input
 from Exceptions.apiExceptions import *
 from flask.views import MethodView
-
+import base64
 from database.userDB import User
 from database.imageDB import Image
 import os
@@ -35,7 +35,7 @@ class Account(MethodView):
                 
                 
         else:
-            image = bytes(data["profile"],"utf-16")
+            image = base64.b64decode(data["profile"])
             
         
         imageID = Image.store_image(image)
