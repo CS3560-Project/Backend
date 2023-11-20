@@ -3,7 +3,7 @@ from flask.views import MethodView
 import json
 from utils.validator import validate_input
 from Exceptions.apiExceptions import MissingArgumentException
-from database.classServerDB import ClassServer
+from database.classServerDB import ClassServerDB
 from database.imageDB import Image
 import os
 
@@ -18,13 +18,24 @@ class ClassServer(MethodView):
         except MissingArgumentException as e:
             return jsonify({"error": e.message}), e.error_code
 
-        server_name = data["serverName"]
 
-        server_id = ClassServer.createClassServer(server_name, server_profile_picture)
+        if "image" not in data.keys():
+            with open(os.path.join(os.getcwd(),"image","userProfiles","download.jpg"),"rb") as file:
+                image = file.read()
+            
+        else:
+            #implement image here if they do put an image
+            pass
+
+        imageID = Image.store_image(image)
+
+        server_id = ClassServerDB.createClassServer(data["serverName"], imageID)
 
         return jsonify({"success": "created", "serverID": server_id}), 201
 
     def get(self):
+
+        data = json.loads(request.data.decode('utf-8'))
         server_name = request.args.get("serverName")
 
         try:

@@ -1,14 +1,14 @@
 from .database import Database
 
-class ClassServer:
+class ClassServerDB:
 
     @staticmethod
-    def createClassServer(serverName, serverProfilePicture=b''):
+    def createClassServer(serverName, imageID):
         query = """
-            INSERT INTO ClassServer (serverName, serverProfilePicture)
+            INSERT INTO ClassServer (serverName, imageID)
             VALUES (%s, %s);
         """
-        values = (serverName, serverProfilePicture)
+        values = (serverName, imageID)
 
         server_id = Database.query(query, values)
 

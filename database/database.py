@@ -103,9 +103,13 @@ class Database:
                 Database.query("""
                     CREATE TABLE IF NOT EXISTS Channel(
                         channelId INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-                        channelName varchar(255) NOT NULL
+                        channelName varchar(255) NOT NULL,
+                        serverID INT NOT NULL,
+                        FOREIGN KEY (serverID) REFERENCES ClassServer(serverID) ON DELETE CASCADE
                     );
                 """)
+
+
             except Error as e:
                 print(e)
 
