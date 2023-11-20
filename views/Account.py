@@ -37,7 +37,7 @@ class Account(MethodView):
         userID = User.createAccount(data["username"],data["email"],data["password"],imageID )
         
         print(userID)
-        return jsonify({"userID":userID}),201
+        return {"userID":userID},201
     def get(self):
         data = request.args.get("email")
         # implement a check on required arguments (when using validator function make sure is_body  is false to ensure correct error is sent)

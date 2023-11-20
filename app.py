@@ -4,12 +4,13 @@ from dotenv import load_dotenv
 import os
 from views.Account import Account
 from views.Image import Image
+from flask_cors import CORS
 
 
 load_dotenv()
 app = Flask(__name__)
 socket = SocketIO(app,logger=True, engineio_logger=True)
-
+CORS(app)
 
 
 @socket.on('connect')
