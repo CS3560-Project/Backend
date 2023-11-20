@@ -47,3 +47,4 @@ class ChannelMessage:
         self.messageID = messageID
         self.channelID = channelID
         self.serverID = serverID
+

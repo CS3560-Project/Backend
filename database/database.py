@@ -42,9 +42,11 @@ class Database:
                     CREATE TABLE IF NOT EXISTS ClassServer(
                         serverID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
                         serverName varchar(255) NOT NULL,
-                        profilePictureID INT NOT NULL,
-                        FOREIGN KEY (profilePictureID) references Image(imageID) ON DELETE CASCADE
-                    );""")
+                        imageID int NOT NULL,  -- Updated column name to imageID
+                        FOREIGN KEY (imageID) references Image(imageID) ON DELETE CASCADE
+                    );
+                """)
+
                 Database.query("""
                     CREATE TABLE IF NOT EXISTS User(
                         userID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,

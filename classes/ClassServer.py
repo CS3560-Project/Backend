@@ -14,9 +14,8 @@ class ClassServer:
     # serverID(int): an identifier for which server
     
 
-    def __init__(self, serverID = 0, serverName ="",profilePicture = None):
+    def __init__(self, serverName ="",profilePicture = None):
         
-        self.__serverID:int =serverID
         self.serverName:str = serverName
         self.profilePicture:Image  = profilePicture
         

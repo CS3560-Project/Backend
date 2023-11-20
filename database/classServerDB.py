@@ -4,24 +4,24 @@ class ClassServerDB:
 
     @staticmethod
     def createClassServer(serverName, imageID):
-        query = """
+        value = Database.query("""
             INSERT INTO ClassServer (serverName, imageID)
             VALUES (%s, %s);
-        """
-        values = (serverName, imageID)
-
-        server_id = Database.query(query, values)
-
-        return server_id
+        """,
+        (serverName, imageID),
+        getID=True)
+        return value
 
     @staticmethod
-    def getClassServer(serverName):
-        server_info = Database.query(
+    def getClassServer(serverID):
+        value = Database.query(
             """
-            SELECT * FROM ClassServer WHERE serverName = %s;
+            SELECT * FROM ClassServer WHERE serverID = %s;
             """,
-            (serverName,),
+            (serverID,),
+            isDictionary=True,
             fetchVal=True
         )
-
-        return server_info
+        print(type(value[0]))
+        print(value)
+        return value[0]
