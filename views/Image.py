@@ -13,8 +13,8 @@ class Image(MethodView):
         
         
         
-        imageDB.Image.store_image(photo_byte)
-        return jsonify("created"),201
+        imageID = imageDB.Image.store_image(photo_byte)
+        return jsonify({"imageID":imageID}),201
     def get(self):
         # make error handler for thewse
         photoID = request.args.get("imageID")
