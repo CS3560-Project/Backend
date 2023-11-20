@@ -1,22 +1,42 @@
-class Channeldb:
+from .database import Database
+
+
+class ChannelThe:
+
     @staticmethod
-    def post_channel(channel):
-        query = """
-            INSERT INTO Channel (channelName) VALUES (%s)
-        """
-        values = (channel.get_channel_name,)
-        channelID = Database.query(query, values)
-        return channelID
+
+    def post_channel(channelName):
+  
+        value = Database.query( 
+
+            """
+            INSERT INTO channel(channelName) VALUES (%s)
+            """,
+
+            (channelName,),
+            getID = True
+            )
+        print("THIS IS GETTING CALLED")
+        return value
+
 
     @staticmethod
     def get_channel(channelID):
-        query = """
+        print("call")
+
+        value = Database.query(
+         """
             SELECT * FROM Channel WHERE channelId = %s
-        """
-        result = Database.query(query, (channelID,), fetchVal=True)
-        if result:
-            return Channel(channelName=result['channelName'], channelID=result['channelId'])
-        return None
+        """,
+        (channelID,),
+        isDictionary = True,
+        fetchVal = True
+        )
+        print(type(value[0]))
+        print(value)
+        return value[0]
+
+    
 
     @staticmethod
     def patch_channel_name(channelID, new_channel_name):

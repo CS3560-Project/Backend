@@ -8,6 +8,7 @@ from flask.views import MethodView
 from database.userDB import User
 from database.imageDB import Image
 import os
+
 class Account(MethodView):
     
     
@@ -41,7 +42,6 @@ class Account(MethodView):
         data = request.args.get("email")
         # implement a check on required arguments (when using validator function make sure is_body  is false to ensure correct error is sent)
         db_val = User.getAccount(email=data)[0]
-        
         
         return jsonify({
             "userID":db_val["userID"],

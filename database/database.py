@@ -102,9 +102,8 @@ class Database:
                 """)
                 Database.query("""
                     CREATE TABLE IF NOT EXISTS Channel(
-                        channelId INT NOT NULL,
-                        channelName varchar(255) NOT NULL,
-                        PRIMARY KEY (channelId)
+                        channelId INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+                        channelName varchar(255) NOT NULL
                     );
                 """)
             except Error as e:

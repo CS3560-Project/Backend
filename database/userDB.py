@@ -1,4 +1,5 @@
 from .database import Database
+
 class User:
     
 
@@ -15,6 +16,7 @@ class User:
             )
         return value
     @staticmethod
+
     def getAccount(email, userID = None):
         value = Database.query(
             """

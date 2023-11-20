@@ -1,15 +1,26 @@
 from Message import Message
+
 class Channel:
-    def __init__(self,channelName = "",channelID = 0):
-        self.__channelID:int = channelID
-        self.channelName:str = channelName  
+    """ 
+    A class to represent a channel
+    
+    Attributes:
+    channelName (str): The name of the channel
+    """
+
+    def __init__(self, channelName="") -> None:
+        self.__channelName: str = channelName
+
     @property
-    def channelName(self) -> str:
-        # returns the channel's name
-        return self.channelName
-    @channelName.setter
-    def channelName(self, channelName:str):
-        self.channelName:str = channelName
+    def channel_name(self) -> str:
+        """Returns the channel's name"""
+        return self.__channelName
+
+    @channel_name.setter
+    def channel_name(self, new_channel_name: str):
+        """Sets the channel's name"""
+        self.__channelName = new_channel_name
+
 
 
 class ChannelMessage:
