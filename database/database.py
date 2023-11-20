@@ -25,7 +25,7 @@ class Database:
                                                               password=password,
 
                                                               host=host)
-                Database.query("DROP DATABASE cpppm;")
+                
                 Database.query("CREATE DATABASE IF NOT EXISTS cpppm;")
                 Database.query("USE cpppm;")
                 
@@ -107,6 +107,7 @@ class Database:
                         PRIMARY KEY (channelId)
                     );
                 """)
+                Database.query("DROP DATABASE cpppm;")
             except Error as e:
                 print(e)
 

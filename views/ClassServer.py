@@ -7,7 +7,7 @@ from database.ClassServer import ClassServer
 from database.imageDB import Image
 import os
 
-class ClassServerView(MethodView):
+class ClassServer(MethodView):
     def post(self):
         required_fields = ["serverName"]
         data = json.loads(request.data.decode('utf-8'))

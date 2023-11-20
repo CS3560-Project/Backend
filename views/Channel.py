@@ -1,3 +1,4 @@
+from pdb import run
 from flask import jsonify, request, send_file
 import io
 import json
@@ -7,7 +8,7 @@ from database.channelDB import Channel, Channeldb
 from utils.validator import validate_input
 from Exceptions.apiExceptions import MissingArgumentException
 
-class ChannelView(MethodView):
+class Channel(MethodView):
     def post(self):
         required_fields = ["channelName"]
         data = json.loads(request.data.decode('utf-8'))
