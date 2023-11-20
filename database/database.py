@@ -107,6 +107,10 @@ class Database:
                         PRIMARY KEY (channelId)
                     );
                 """)
+                Database.query("""
+                    INSERT INTO Course(courseId,courseName)
+                        VALUES ("CS3560", "Intro to OOP");
+                """)
             except Error as e:
                 print(e)
 
