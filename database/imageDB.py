@@ -10,6 +10,7 @@ class Image:
         img_byte = BytesIO(img)
         img_type = Img.open(img_byte).format
         
+        img_type = img.split(";")[0].split("/")[1]
         imageID = Database.query(
             """
                 INSERT INTO IMAGE(image,imageType)

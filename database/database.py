@@ -32,8 +32,7 @@ class Database:
                 Database.query("""
                     CREATE TABLE IF NOT EXISTS Image(
                         imageID int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-                        
-                        image BLOB NOT NULL,
+                        image MEDIUMTEXT NOT NULL,
                         imageType VARCHAR(10) NOT NULL
                         
                     );
@@ -57,11 +56,11 @@ class Database:
                 """)
                 Database.query("""
                     CREATE TABLE IF NOT EXISTS UserServers(
-                        userServersUserID INT NOT NULL,
-                        userServersServerID INT NOT NULL,
-                        PRIMARY KEY (userServersUserID, userServersServerID),
-                        FOREIGN KEY (userServersUserID) REFERENCES User(userID) ON DELETE CASCADE,
-                        FOREIGN KEY (userServersServerID) REFERENCES ClassServer(serverID) ON DELETE CASCADE
+                        userID INT NOT NULL,
+                        serverID INT NOT NULL,
+                        PRIMARY KEY (userID, serverID),
+                        FOREIGN KEY (userID) REFERENCES User(userID) ON DELETE CASCADE,
+                        FOREIGN KEY (serverID) REFERENCES ClassServer(serverID) ON DELETE CASCADE
                     );
                 """)
                 Database.query("""
@@ -102,9 +101,8 @@ class Database:
                 """)
                 Database.query("""
                     CREATE TABLE IF NOT EXISTS Channel(
-                        channelId INT NOT NULL,
-                        channelName varchar(255) NOT NULL,
-                        PRIMARY KEY (channelId)
+                        channelId INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+                        channelName varchar(255) NOT NULL
                     );
                 """)
             except Error as e:

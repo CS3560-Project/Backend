@@ -17,6 +17,7 @@ mysql-connector = "*"
 mysql-connector-python = "*"
 pillow = "*"
 flask-socketio = "*"
+flask-cors = "*"
 
 [dev-packages]
 
