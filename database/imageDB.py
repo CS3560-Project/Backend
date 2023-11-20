@@ -6,7 +6,7 @@ class Image:
     @staticmethod
     def store_image(img):
         
-        img_type = Img.open(BytesIO(img)).format.lower()
+        img_type = img.split(";")[0].split("/")[1]
         imageID = Database.query(
             """
                 INSERT INTO IMAGE(image,imageType)

@@ -32,8 +32,7 @@ class Database:
                 Database.query("""
                     CREATE TABLE IF NOT EXISTS Image(
                         imageID int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-                        
-                        image BLOB NOT NULL,
+                        image MEDIUMTEXT NOT NULL,
                         imageType VARCHAR(10) NOT NULL
                         
                     );

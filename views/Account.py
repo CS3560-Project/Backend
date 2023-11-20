@@ -24,18 +24,19 @@ class Account(MethodView):
         except MissingArgumentException as e:
             
             return jsonify({"error":e.message}),e.error_code
-        if "image" not in data.keys():
+        if data["profilePicture"] == "":
             with open(os.path.join(os.getcwd(),"image","userProfiles","download.jpg"),"rb") as file:
                 image = file.read()
             
         else:
             #implement image here if they do put an image
+            image = data["profilePicture"]
             pass
         imageID = Image.store_image(image)
 
         userID = User.createAccount(data["username"],data["email"],data["password"],imageID )
         
-
+        print(userID)
         return jsonify({"userID":userID}),201
     def get(self):
         data = request.args.get("email")
