@@ -1,18 +1,28 @@
 from .database import Database
-from .database import imageDB
+from .imageDB import Image
 class Message():
     @staticmethod 
-    def create_message(channelID, serverID, userID, timeSent,message,images = []):
+    def create_message(channelID, serverID, userID, timeSent,message,image = None):
+        print("lmfao")
         messageID = Database.query(
             """
-            INSERT INTO Message(channelId,serverID,userID,timeSent,message)
-            VALUES(%s,%s,%s,%s)
+            INSERT INTO Message(userID,timeSent,message)
+            VALUES(%s,%s,%s)
             """,
-            (channelID,serverID,userID,timeSent),
+            (userID,timeSent,message),
             getID = True
         )
+        print(messageID)
+        Database.query(
+            """
+            INSERT INTO SERVERMESSAGE(ChannelID,ServerID,MessageID)
+            VALUES(%s,%s,%s)
+
+            """,
+            (channelID,serverID,messageID)
+        )
         # test these 
-        for image in images:
+        if image:
             imageID = imageDB.store_image(image)
             Database.query(
                 """
@@ -27,13 +37,18 @@ class Message():
             """
             DELETE FROM MESSAGE:
             where messageID = %s,
-            """
+            """,
             (messageID,)
         )
     @staticmethod
     def get_messages_for_channel(channelID,serverID):
-        Database.query(
+        # test this
+        messages = Database.query(
             """
-                SELECT * FROM 
-            """
+                SELECT * FROM message where messageID in (
+                    SELECT messageID FROM ServerMessage where channelID = %s and serverID =%s,
+                )
+            """,
+            fetchVal = True
             )
+        return messages

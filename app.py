@@ -13,13 +13,14 @@ import json
 
 load_dotenv()
 app = Flask(__name__)
-socketio = SocketIO(app,cors_allowed_origins='*')
-
+socketio = SocketIO(app,cors_allowed_origins='*',debug = True)
+CORS(app)
 
 
 
 
 app.add_url_rule('/account/', view_func = Account.as_view('acc'))
 app.add_url_rule('/image/',view_func = Image.as_view('image'))
+
 socketio.on_namespace(Message("/message"))
 

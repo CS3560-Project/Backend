@@ -42,7 +42,7 @@ class Database:
                         serverID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
                         serverName varchar(255) NOT NULL,
                         imageID INT NOT NULL,
-                        FOREIGN KEY (profilePictureID) references Image(imageID) ON DELETE CASCADE
+                        FOREIGN KEY (imageID) references Image(imageID) ON DELETE CASCADE
                     );""")
                 Database.query("""
                     CREATE TABLE IF NOT EXISTS User(
@@ -64,17 +64,26 @@ class Database:
                     );
                 """)
                 Database.query("""
+                    CREATE TABLE IF NOT EXISTS Channel(
+                        channelId INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+                        channelName varchar(255) NOT NULL,
+                        serverID INT NOT NULL,
+                        FOREIGN KEY (serverID) REFERENCES ClassServer(serverID) ON DELETE CASCADE
+                    );
+                """)
+                
+                Database.query("""
                     CREATE TABLE IF NOT EXISTS Message(
                         messageID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
                         
 
                         message varchar(255) NOT NULL,
-                        channelID INT NOT NULL,
-                        sender INT NOT NULL,
-                        timeSent TIMESTAMP NOT NULL,
-                        edited BOOLEAN NOT NULL,
-                        FOREIGN KEY (sender) REFERENCES User(userID) ON DELETE CASCADE,
-                        FOREIGN KEY (channelID) REFERENCES Channel(channelID) ON DELETE CASCADE,
+                        
+                        userID INT NOT NULL,
+                        timeSent DATETIME  NOT NULL,
+                        edited BOOLEAN DEFAULT false,
+                        FOREIGN KEY (userID) REFERENCES User(userID) ON DELETE CASCADE
+                        
                     );
                 """)
                 
@@ -104,14 +113,19 @@ class Database:
                         FOREIGN KEY (courseId) REFERENCES COURSE(courseId) ON DELETE CASCADE
                     );
                 """)
-                Database.query("""
-                    CREATE TABLE IF NOT EXISTS Channel(
-                        channelId INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-                        channelName varchar(255) NOT NULL,
-                        serverID INT NOT NULL,
-                        FOREIGN KEY (serverID) REFERENCES ClassServer(serverID) ON DELETE CASCADE
+                Database.query(
+                    """
+                    CREATE TABLE IF NOT EXISTS ServerMessage(
+                        ChannelID INT NOT NULL,
+                        ServerID INT NOT NULL,
+                        MessageID INT NOT NULL,
+                        PRIMARY KEY (ChannelID,ServerID,MessageID),
+                        FOREIGN KEY (messageID) REFERENCES Message(messageID) ON DELETE CASCADE,
+                        FOREIGN KEY (serverID) REFERENCES ClassServer(serverID) ON DELETE CASCADE,
+                        FOREIGN KEY (channelID) REFERENCES Channel(channelID) ON DELETE CASCADE
+
                     );
-                """)
+                    """)
 
                 imageID = Database.query(
                     """

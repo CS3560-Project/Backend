@@ -1,1 +1,1 @@
-SELECT * FROM IMAGE
+select * from servermessage
