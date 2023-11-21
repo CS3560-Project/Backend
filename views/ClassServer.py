@@ -65,20 +65,16 @@ class ClassServer(MethodView):
 
     def get(self):
 
-        data = json.loads(request.data.decode('utf-8'))
-        required_fields = ["serverID"]
+        # Assuming "serverID" is a required query parameter
+        server_id = request.args.get("serverID")
 
-        try:
-            validate_input(data.keys(), required_fields)
+        if not server_id:
+            return jsonify({"error": "Missing required parameter 'serverID'"}), 400
 
-        except MissingArgumentException as e:
-            return jsonify({"error": e.message}), e.error_code
-
-        server = ClassServerDB.getClassServer(data["serverID"])
+        server = ClassServerDB.getClassServer(server_id)
 
         if server:
             all_channels = Channel.get_channel_from_server(server["serverID"])
-
 
             return jsonify({
                 "serverName": server["serverName"],

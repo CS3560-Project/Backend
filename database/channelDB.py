@@ -28,6 +28,8 @@ class ChannelThe:
         print(value)
         return value[0]
     
+    
+    @staticmethod
     def get_channel_from_server(serverID):
         value = Database.query(
             """

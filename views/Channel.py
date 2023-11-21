@@ -30,24 +30,27 @@ class ChannelView(MethodView):
         return jsonify({"success": "created", "channelID": new_channel}), 201
 
     def get(self):
-        data = json.loads(request.data.decode('utf-8'))
-        required_fields = ["channelId"]
+        channel_id = request.args.get("channelId")
+
+        if not channel_id:
+            return jsonify({"error": "Missing required parameter 'channelId'"}), 400
+
         try:
-            validate_input(data.keys(), required_fields)
-        except MissingArgumentException as e:
-            return jsonify({"error": e.message}), e.error_code
+            channel = Channel.get_channel(channel_id)
+            if channel:
+                server_id = channel.get("serverID", None)
+                server_name = ClassServerDB.getClassServer(server_id)["serverName"] if server_id else None
 
-        channel = Channel.get_channel(data["channelId"])
-
-        if channel:
-            return jsonify({
-                "channelName": channel["channelName"],
-                "channelID": channel["channelId"],
-                "serverID": channel.get("serverID", None),  # Add serverID if present
-                "serverName": ClassServerDB.getClassServer(channel.get("serverID", None))["serverName"]
-            })
-        else:
-            return jsonify({"error": "Channel not found"}), 404
+                return jsonify({
+                    "channelName": channel["channelName"],
+                    "channelID": channel["channelId"],
+                    "serverID": server_id,
+                    "serverName": server_name
+                })
+            else:
+                return jsonify({"error": "Channel not found"}), 404
+        except Exception as e:
+            return jsonify({"error": str(e)}), 500
 
 
 
@@ -65,17 +68,20 @@ class ChannelView(MethodView):
         return jsonify(f"Channel {data['channelID']} name changed to {data['newChannelName']}"), 200
 
     def delete(self):
-            data = json.loads(request.data.decode('utf-8'))
-            required_fields = ["channelId"]
-            try:
-                validate_input(data.keys(), required_fields)
+        # Assuming "channelId" is a required query parameter
+        channel_id = request.args.get("channelId")
 
+        if not channel_id:
+            return jsonify({"error": "Missing required parameter 'channelId'"}), 400
 
-            except MissingArgumentException as e:
-                return jsonify({"error": e.message}), e.error_code
-            try:
-                server_id = Channel.get_channel(data["channelId"])["serverID"]
-                Channel.delete_channel(data["channelId"])
-                return jsonify({"success": "deleted", "channelID": data["channelId"],"serverID:" : server_id, "serverName" : ClassServerDB.getClassServer(server_id)["serverName"] }), 200
-            except Exception as e:
-                return jsonify({"error": str(e)}), 500
+        try:
+            server_id = Channel.get_channel(channel_id)["serverID"]
+            Channel.delete_channel(channel_id)
+            return jsonify({
+                "success": "deleted",
+                "channelID": channel_id,
+                "serverID": server_id,
+                "serverName": ClassServerDB.getClassServer(server_id)["serverName"]
+            }), 200
+        except Exception as e:
+            return jsonify({"error": str(e)}), 500
