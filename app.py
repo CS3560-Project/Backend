@@ -6,13 +6,13 @@ from views.Account import Account
 from views.Image import Image
 from views.CourseSection import CourseSection
 
-from flask_cors import CORS
+
 import json
 
 load_dotenv()
 app = Flask(__name__)
 socket = SocketIO(app, cors_allowed_origins="*")
-CORS(app)
+
 
 
 @socket.on('connect')
