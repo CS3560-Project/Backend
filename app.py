@@ -27,3 +27,5 @@ def handle_message(message):
 app.add_url_rule('/account/', view_func = Account.as_view('acc'))
 app.add_url_rule('/image/',view_func = Image.as_view('image'))
 app.add_url_rule('/section/',view_func = CourseSection.as_view('section'))
+app.add_url_rule('/channel/',view_func = ChannelView.as_view('channel'))
+app.add_url_rule('/classserver/',view_func = ClassServer.as_view('classserver'))
