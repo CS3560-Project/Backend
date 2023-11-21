@@ -30,3 +30,10 @@ class Message():
             """
             (messageID,)
         )
+    @staticmethod
+    def get_messages_for_channel(channelID,serverID):
+        Database.query(
+            """
+                SELECT * FROM 
+            """
+            )

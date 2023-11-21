@@ -66,6 +66,8 @@ class Database:
                 Database.query("""
                     CREATE TABLE IF NOT EXISTS Message(
                         messageID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+                        
+
                         message varchar(255) NOT NULL,
                         sender INT NOT NULL,
                         timeSent TIMESTAMP NOT NULL,
@@ -73,6 +75,7 @@ class Database:
                         FOREIGN KEY (sender) REFERENCES User(userID) ON DELETE CASCADE
                     );
                 """)
+                
                 Database.query("""
                     CREATE TABLE IF NOT EXISTS MessageImage(
                         messageID INT NOT NULL,
@@ -102,7 +105,8 @@ class Database:
                 Database.query("""
                     CREATE TABLE IF NOT EXISTS Channel(
                         channelId INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-                        channelName varchar(255) NOT NULL
+                        channelName varchar(255) NOT NULL,
+
                     );
                 """)
             except Error as e:
@@ -121,7 +125,7 @@ class Database:
 
     @classmethod
 
-    def query(cls, querys, data=None, isMulti=False, fetchVal = False,getID= False,isDictionary = False):
+    def query(cls, querys, data=None, isMulti=False, fetchVal = False,getID= False,isDictionary = False,):
         """
             Use fetchVal if you want to geet the result
             use getID to get the previous value id of the insert
@@ -130,7 +134,7 @@ class Database:
         cursor.execute(querys, params=data, multi=isMulti)
         value = None
         if fetchVal:
-            # print('here')
+            
             value = cursor.fetchall()
         if getID:
             value = cursor.lastrowid 
