@@ -21,6 +21,6 @@ class Message(Namespace):
             channelID,serverID,userID,time,messsage,image
         )
         data["messageID"] = messageID
-        print(data["messageID"])
+        
         emit('message_received', json.dumps(data))
 
