@@ -48,7 +48,7 @@ class Account(MethodView):
         return jsonify({"userID":userID}),201
     def get(self):
         email = request.args.get("email")
-        password = request.args.get("pasword")
+        password = request.args.get("password")
         # implement a check on required arguments (when using validator function make sure is_body  is false to ensure correct error is sent)
         
         db_val = User.getAccount(email=email)
@@ -56,7 +56,7 @@ class Account(MethodView):
             return jsonify({"error": f"no account associated with {email}"}),404
         db_val = db_val[0]
         if password != db_val["password"]:
-            return jsonify({"error":"incorrect passowrd"}),404
+            return jsonify({"error":"incorrect password"}),404
         return jsonify({
             "userID":db_val["userID"],
             "userName":db_val["userName"],
