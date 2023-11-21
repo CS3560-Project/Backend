@@ -4,6 +4,7 @@ import json
 from utils.validator import validate_input
 from Exceptions.apiExceptions import MissingArgumentException
 from database.classServerDB import ClassServerDB
+from database.userServerDB import UserServer
 from database.imageDB import Image
 from database.channelDB import ChannelThe as Channel
 import os
@@ -60,11 +61,13 @@ class ClassServer(MethodView):
 
         if server:
             all_channels = Channel.get_channel_from_server(server["serverID"])
-            
+            all_userID = UserServer.getUserOfServer(server_id)
+            all_userID = [i[0] for i in all_userID]
             return jsonify({
                 "serverName": server["serverName"],
                 "serverID": server["serverID"],
-                "channels": all_channels
+                "channels": all_channels,
+                "userIDs":all_userID
             })
         else:
             return jsonify({"error": "ClassServer not found"}), 404

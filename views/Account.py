@@ -7,7 +7,7 @@ from flask.views import MethodView
 import base64
 from database.userDB import User
 from database.imageDB import Image
-from database.imageDB import Image
+from database.userServerDB import UserServer
 import os
 
 class Account(MethodView):
@@ -49,11 +49,15 @@ class Account(MethodView):
         db_val = db_val[0]
         if password != db_val["password"]:
             return jsonify({"error": "incorrect password"}), 404
+        
+        userServers = UserServer.getServerIDS(db_val["userID"])
+        userServers = [x[0] for x in userServers]
         return jsonify({
             "userID": db_val["userID"],
             "userName": db_val["userName"],
             "password": db_val["password"],
-            "imageID": db_val["profilePictureID"]
+            "imageID": db_val["profilePictureID"],
+            "serverIDs":userServers
         }), 200
 
     def patch(self):

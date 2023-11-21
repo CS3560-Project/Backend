@@ -11,5 +11,6 @@ class Message_endpoint(MethodView):
         messages = Message.get_messages_for_channel(channelID,serverID)
 
         return messages
+        
 
 

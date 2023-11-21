@@ -15,12 +15,27 @@ class UserServer:
         return value
     
     @staticmethod
-    def getUserServer(userId):
+    def getUserOfServer(serverID):
         value = Database.query(
             """
-            SELECT * FROM UserServers where userID = %s;
+            SELECT userID FROM UserServers where serverID = %s;
             """,
-            (userId,),
+            (serverID,),
             fetchVal = True
         )
         return value
+
+        
+    @staticmethod
+    def getServerIDS(userID):
+        serverIDs = Database.query(
+            """
+                SELECT ServerID FROM UserServers where 
+                userID = %s
+            """,
+            (userID,),
+            fetchVal = True
+        )
+        return serverIDs
+
+    

@@ -26,3 +26,5 @@ class ClassServerDB:
         print(type(value[0]))
         print(value)
         return value[0]
+    
+        

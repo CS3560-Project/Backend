@@ -10,6 +10,7 @@ from sockets.message import Message
 from flask_socketio import SocketIO
 from views.CourseSection import CourseSection
 from views.Message import Message_endpoint
+from views.UserServer import UserServer
 from flask_cors import CORS
 
 import json
@@ -31,3 +32,5 @@ socketio.on_namespace(Message("/message"))
 app.add_url_rule('/channel/',view_func = ChannelView.as_view('channel'))
 app.add_url_rule('/classserver/',view_func = ClassServer.as_view('classserver'))
 app.add_url_rule('/message/',view_func = Message_endpoint.as_view('message'))
+
+app.add_url_rule('/userServer/',view_func = UserServer.as_view('userServer'))
