@@ -20,27 +20,12 @@ class ClassServer(MethodView):
 
         except MissingArgumentException as e:
             return jsonify({"error": e.message}), e.error_code
-        print(data)
-        print("\n\n\n")
-   
-
-        if "imageID" not in data:
-            print("not in data")
-            print("\n\n\n")
-            with open(os.path.join(os.getcwd(),"image","userProfiles","download.jpg"),"rb") as file:
-                image = file.read()
-            
-        else:
-            image = data["imageID"]
-            pass
-    
         
-        print("\n\n\n")
-        imageID = Image.store_image(image)
-        print(imageID)
         
-        print("\n\n\n")
-        server_id = ClassServerDB.createClassServer(data["serverName"], imageID)
+        
+        
+        
+        server_id = ClassServerDB.createClassServer(data["serverName"])
         
         
         general_id = Channel.post_channel(channelName="general",serverID=server_id)
@@ -75,7 +60,7 @@ class ClassServer(MethodView):
 
         if server:
             all_channels = Channel.get_channel_from_server(server["serverID"])
-
+            
             return jsonify({
                 "serverName": server["serverName"],
                 "serverID": server["serverID"],

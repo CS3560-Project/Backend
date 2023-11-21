@@ -40,9 +40,8 @@ class Database:
                 Database.query("""
                     CREATE TABLE IF NOT EXISTS ClassServer(
                         serverID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-                        serverName varchar(255) NOT NULL,
-                        imageID INT NOT NULL,
-                        FOREIGN KEY (imageID) references Image(imageID) ON DELETE CASCADE
+                        serverName varchar(255) NOT NULL
+                        
                     );""")
                 Database.query("""
                     CREATE TABLE IF NOT EXISTS User(

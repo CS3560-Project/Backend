@@ -14,12 +14,13 @@ class Message(Namespace):
         messsage = data.get("text")
         time = data.get("timestamp")
         image = data.get("image") 
-        channelID = data.get("channelID")
-        serverID = data.get("serverID")
+        channelID = data.get("channelID") #still waiting on this
+        serverID = data.get("serverID") # still waiting
         # print(userID)
-        messageDB.create_message(
+        messageID = messageDB.create_message(
             channelID,serverID,userID,time,messsage,image
         )
-        
+        data["messageID"] = messageID
+        print(data["messageID"])
         emit('message_received', json.dumps(data))
 

@@ -3,12 +3,13 @@ from .database import Database
 class ClassServerDB:
 
     @staticmethod
-    def createClassServer(serverName, imageID):
+    def createClassServer(serverName):
+        print(serverName)
         value = Database.query("""
-            INSERT INTO ClassServer (serverName, imageID)
-            VALUES (%s, %s);
+            INSERT INTO ClassServer(serverName)
+            VALUES (%s)
         """,
-        (serverName, imageID),
+        (serverName,),
         getID=True)
         return value
 

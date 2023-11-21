@@ -3,7 +3,7 @@ from .imageDB import Image
 class Message():
     @staticmethod 
     def create_message(channelID, serverID, userID, timeSent,message,image = None):
-        print("lmfao")
+        
         messageID = Database.query(
             """
             INSERT INTO Message(userID,timeSent,message)
