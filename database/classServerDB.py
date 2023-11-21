@@ -1,15 +1,27 @@
 from .database import Database
 
-class ClassServer:
+class ClassServerDB:
 
     @staticmethod
-    def createClassServer(serverName, serverProfilePicture=b''):
-        query = """
-            INSERT INTO ClassServer (serverName, serverProfilePicture)
+    def createClassServer(serverName, imageID):
+        value = Database.query("""
+            INSERT INTO ClassServer (serverName, imageID)
             VALUES (%s, %s);
-        """
-        values = (serverName, serverProfilePicture)
+        """,
+        (serverName, imageID),
+        getID=True)
+        return value
 
-        server_id = Database.query(query, values)
-
-        return server_id
+    @staticmethod
+    def getClassServer(serverID):
+        value = Database.query(
+            """
+            SELECT * FROM ClassServer WHERE serverID = %s;
+            """,
+            (serverID,),
+            isDictionary=True,
+            fetchVal=True
+        )
+        print(type(value[0]))
+        print(value)
+        return value[0]
