@@ -12,7 +12,7 @@ class Message():
             (userID,timeSent,message),
             getID = True
         )
-        print(messageID)
+        
         Database.query(
             """
             INSERT INTO SERVERMESSAGE(ChannelID,ServerID,MessageID)
@@ -31,6 +31,7 @@ class Message():
                 """,
                 (imageID,messageID)
             )
+        return messageID
     @staticmethod
     def delete_message(messageID):
         Database.query(
@@ -46,9 +47,11 @@ class Message():
         messages = Database.query(
             """
                 SELECT * FROM message where messageID in (
-                    SELECT messageID FROM ServerMessage where channelID = %s and serverID =%s,
+                    SELECT messageID FROM ServerMessage where channelID = %s and serverID =%s
                 )
             """,
-            fetchVal = True
+            (channelID,serverID),
+            fetchVal = True,
+            isDictionary = True
             )
         return messages
