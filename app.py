@@ -3,6 +3,8 @@ from flask_socketio import Namespace
 from dotenv import load_dotenv
 import os
 from views.Account import Account
+from views.Channel import ChannelView
+from views.ClassServer import ClassServer
 from views.Image import Image
 from sockets.message import Message
 from flask_socketio import SocketIO
