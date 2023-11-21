@@ -1,14 +1,10 @@
 from .database import Database
 from PIL import Image as Img
 from io import BytesIO
-from PIL import Image as Img
-from io import BytesIO
 class Image:
     # implement crud operation here
     @staticmethod
     def store_image(img):
-        
-        
         img_type = img.split(";")[0].split("/")[1]
         imageID = Database.query(
             """
