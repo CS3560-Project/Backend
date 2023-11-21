@@ -69,10 +69,12 @@ class Database:
                         
 
                         message varchar(255) NOT NULL,
+                        channelID INT NOT NULL,
                         sender INT NOT NULL,
                         timeSent TIMESTAMP NOT NULL,
                         edited BOOLEAN NOT NULL,
-                        FOREIGN KEY (sender) REFERENCES User(userID) ON DELETE CASCADE
+                        FOREIGN KEY (sender) REFERENCES User(userID) ON DELETE CASCADE,
+                        FOREIGN KEY (channelID) REFERENCES Channel(channelID) ON DELETE CASCADE,
                     );
                 """)
                 
