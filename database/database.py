@@ -42,7 +42,7 @@ class Database:
                         serverID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
                         serverName varchar(255) NOT NULL,
                         imageID INT NOT NULL,
-                        FOREIGN KEY (profilePictureID) references Image(imageID) ON DELETE CASCADE
+                        FOREIGN KEY (imageID) references Image(imageID) ON DELETE CASCADE
                     );""")
                 Database.query("""
                     CREATE TABLE IF NOT EXISTS User(
