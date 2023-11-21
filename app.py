@@ -24,3 +24,6 @@ app.add_url_rule('/image/',view_func = Image.as_view('image'))
 
 socketio.on_namespace(Message("/message"))
 
+
+app.add_url_rule('/channel/',view_func = ChannelView.as_view('channel'))
+app.add_url_rule('/classserver/',view_func = ClassServer.as_view('classserver'))
