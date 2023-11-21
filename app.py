@@ -6,6 +6,10 @@ from views.Account import Account
 from views.Image import Image
 from sockets.message import Message
 from flask_socketio import SocketIO
+from views.CourseSection import CourseSection
+from flask_cors import CORS
+
+import json
 
 load_dotenv()
 app = Flask(__name__)

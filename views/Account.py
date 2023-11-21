@@ -28,7 +28,7 @@ class Account(MethodView):
         except MissingArgumentException as e:
             
             return jsonify({"error":e.message}),e.error_code
-        if data["profilePicture"] == "":
+        if "profile" not in data.keys():
             with open(os.path.join(os.getcwd(),"image","userProfiles","download.jpg"),"rb") as file:
                 image = file.read()
 
@@ -36,29 +36,33 @@ class Account(MethodView):
                 
                 
         else:
-            #implement image here if they do put an image
-            image = data["profilePicture"]
-            pass
+            image = base64.b64decode(data["profile"])
+            
+        
         imageID = Image.store_image(image)
 
         userID = User.createAccount(data["username"],data["email"],data["password"],imageID )
         
-        print(userID)
-        return {"userID":userID},201
+
+        return jsonify({"userID":userID}),201
+        return jsonify({"userID":userID}),201
     def get(self):
-        data = request.args.get("email")
+        email = request.args.get("email")
+        password = request.args.get("password")
         # implement a check on required arguments (when using validator function make sure is_body  is false to ensure correct error is sent)
         
-        db_val = User.getAccount(email=data)
+        db_val = User.getAccount(email=email)
         if len(db_val) == 0 :
-            return jsonify({"error": f"no account associated with {data}"}),404
+            return jsonify({"error": f"no account associated with {email}"}),404
         db_val = db_val[0]
+        if password != db_val["password"]:
+            return jsonify({"error":"incorrect password"}),404
         return jsonify({
             "userID":db_val["userID"],
             "userName":db_val["userName"],
             "password":db_val["password"],
             "imageID":db_val["profilePictureID"]
-        })
+        }),200
         
     def patch(self):
         # changes the account

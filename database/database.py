@@ -41,7 +41,7 @@ class Database:
                     CREATE TABLE IF NOT EXISTS ClassServer(
                         serverID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
                         serverName varchar(255) NOT NULL,
-                        profilePictureID INT NOT NULL,
+                        imageID INT NOT NULL,
                         FOREIGN KEY (profilePictureID) references Image(imageID) ON DELETE CASCADE
                     );""")
                 Database.query("""
@@ -106,7 +106,8 @@ class Database:
                     CREATE TABLE IF NOT EXISTS Channel(
                         channelId INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
                         channelName varchar(255) NOT NULL,
-
+                        serverID INT NOT NULL,
+                        FOREIGN KEY (serverID) REFERENCES ClassServer(serverID) ON DELETE CASCADE
                     );
                 """)
             except Error as e:
