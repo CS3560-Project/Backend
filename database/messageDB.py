@@ -42,12 +42,12 @@ class Message():
             (messageID,)
         )
     @staticmethod
-    def get_messages_for_channel(channelID,serverID):
+    def get_messages_for_channel(channelID):
         # test this
         messages = Database.query(
             """
                 SELECT * FROM message where messageID in (
-                    SELECT messageID FROM ServerMessage where channelID = %s and serverID =%s
+                    SELECT messageID FROM ServerMessage where channelID = %s
                 )
             """,
             (channelID,serverID),

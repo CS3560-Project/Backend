@@ -34,7 +34,7 @@ class User:
             (email,)
         )
     @staticmethod
-    def changeAccount(email, username,password, userID = None ):
+    def changeAccount(email, username,password, userID ):
         Database.query(
             """
             UPDATE user

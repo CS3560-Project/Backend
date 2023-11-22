@@ -59,6 +59,9 @@ app.add_url_rule('/message/',view_func = Message_endpoint.as_view('message'))
 
 # use this post endpoint to join users with servers
 app.add_url_rule('/userServer/',view_func = UserServer.as_view('userServer'))
+app.add_url_rule('/courseSection/',view_func = CourseSection.as_view('coursection'))
 
 # important to note that userID,channelID and serverID cannot be null
 socketio.on_namespace(Message("/message"))
+
+

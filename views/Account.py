@@ -63,7 +63,7 @@ class Account(MethodView):
     def patch(self):
         # changes the account
         data = json.loads(request.data.decode('utf-8'))
-        required_field = ["email", "username", "password"]
+        required_field = ["userID","email", "username", "password"]
         try:
             validate_input(data.keys(), required_field)
 
