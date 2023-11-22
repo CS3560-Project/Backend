@@ -11,6 +11,7 @@ from flask_socketio import SocketIO
 from views.CourseSection import CourseSection
 from views.Message import Message_endpoint
 from views.UserServer import UserServer
+from views.Course import Course
 from flask_cors import CORS
 
 import json
@@ -62,3 +63,7 @@ app.add_url_rule('/userServer/',view_func = UserServer.as_view('userServer'))
 
 # important to note that userID,channelID and serverID cannot be null
 socketio.on_namespace(Message("/message"))
+
+
+# use this post endpoint to join users with servers
+app.add_url_rule('/course/',view_func = Course.as_view('course'))
