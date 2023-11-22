@@ -39,9 +39,6 @@ class ChannelThe:
             isDictionary=True,
             fetchVal=True
         )
-        print(value)
-        print(value[0])
-        print("\n\n\n\n")
         return value
     
 
