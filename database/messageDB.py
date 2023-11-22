@@ -50,7 +50,7 @@ class Message():
                     SELECT messageID FROM ServerMessage where channelID = %s
                 )
             """,
-            (channelID,serverID),
+            (channelID,),
             fetchVal = True,
             isDictionary = True
             )

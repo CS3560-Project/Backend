@@ -7,8 +7,7 @@ from database.messageDB import Message
 class Message_endpoint(MethodView):
     def get(self):
         channelID = request.args.get("channelID")
-        serverID = request.args.get("serverID")
-        messages = Message.get_messages_for_channel(channelID,serverID)
+        messages = Message.get_messages_for_channel(channelID)
 
         return messages
 
