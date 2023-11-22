@@ -6,7 +6,7 @@ class Course:
     def create_course(course_name):
 
         Database.query("""
-            INSERT INTO Course(courseName)
+            INSERT IGNORE INTO Course(courseName)
             VALUES(%s)
         """, (course_name,), getID=True)
 

@@ -1,4 +1,3 @@
-INSERT INTO ClassServer(serverName)
-            VALUES ("hi")
--- @blockx
-show tables
+SELECT * FROM COURSE
+-- @block
+INSERT IGNORE INTO COURSE(courseName)VALUES("cs4800")

@@ -25,6 +25,7 @@ class Database:
                                                               password=password,
 
                                                               host=host)
+                
                 Database.query("CREATE DATABASE IF NOT EXISTS cpppm;")
                 Database.query("USE cpppm;")
 
@@ -94,18 +95,15 @@ class Database:
                         FOREIGN KEY (imageID) REFERENCES Image(imageID) ON DELETE CASCADE
                     );
                 """)
-                Database.query("""
-                    CREATE TABLE IF NOT EXISTS Course(
-                        courseId INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-                        courseName varchar(255) NOT NULL
-                    );
-                """)
+                
                 Database.query("""
                     CREATE TABLE IF NOT EXISTS CourseSection(
                         sectionId INT NOT NULL,
-                        courseId INT NOT NULL,
-                        PRIMARY KEY (courseId, sectionId),
-                        FOREIGN KEY (courseId) REFERENCES COURSE(courseId) ON DELETE CASCADE
+                        courseName varchar(255) NOT NULL,
+                        serverID INT NOT NULL,
+                        PRIMARY KEY (courseName, sectionId),
+                        
+                        FOREIGN KEY (serverID) REFERENCES classServer(serverID) ON DELETE CASCADE
                     );
                 """)
                 Database.query(
