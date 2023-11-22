@@ -4,9 +4,10 @@ import json
 from utils.validator import validate_input
 from Exceptions.apiExceptions import *
 from flask.views import MethodView
-
+from database.channelDB import ChannelThe as Channel
 from database.courseSectionDB import CourseSection as Section
 from database.courseDB import Course
+from database.classServerDB import ClassServerDB
 import os
 
 class CourseSection(MethodView):
@@ -21,11 +22,11 @@ class CourseSection(MethodView):
 
         except MissingArgumentException as e:
             return jsonify({"error":e.message}),e.error_code
-        exists = Section.getCourseSection(data["coursId"],data["sectionId"])
+        exists = Section.getCourseSection(data["courseName"],data["sectionId"])
         if len(exists) == 0:
-            server_id = ClassServerDB.createClassServer(f'{data["courseId"]},{data["sectionId"]}')
+            server_id = ClassServerDB.createClassServer(f'{data["courseName"]}-{data["sectionId"]}')
         
-            courseSection = Section.createCourseSection(data["courseId"], data["sectionId"],serverID)
+            courseSection = Section.createCourseSection(data["courseName"], data["sectionId"],server_id)
             general_id = Channel.post_channel(channelName="general",serverID=server_id)
             homework_id = Channel.post_channel(channelName="homework",serverID=server_id)
             offtopic_id = Channel.post_channel(channelName="offtopic",serverID=server_id)
@@ -33,7 +34,7 @@ class CourseSection(MethodView):
             response_data = {
                 "success": "created",
                 "serverID": server_id,
-                "serverName": data["serverName"],
+                "serverName": f'{data["courseName"]}-{data["sectionId"]}',
                 "defaultChannels": {
                     "general": Channel.get_channel(general_id),
                     "homework": Channel.get_channel(homework_id),
@@ -42,7 +43,7 @@ class CourseSection(MethodView):
             }
             return jsonify(response_data),201
         else:
-            return exists[0]
+            return jsonify({"serverID":exists[0][0]})
 
 
     def get(self):

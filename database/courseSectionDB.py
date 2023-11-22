@@ -4,14 +4,14 @@ class CourseSection():
     # implement crud operation here
     
     @staticmethod
-    def createCourseSection(courseId, sectionId, serverID):
+    def createCourseSection(courseName, sectionId, serverID):
         # print(cls.instance)
         value = Database.query(
             """
-            INSERT INTO CourseSection(courseId, sectionId,serverID)
+            INSERT INTO CourseSection(courseName, sectionId,serverID)
             VALUES (%s,%s,%s)
             """,
-            (courseId, sectionId,serverID),
+            (courseName, sectionId,serverID),
             
             )
         

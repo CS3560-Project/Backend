@@ -25,7 +25,7 @@ class Database:
                                                               password=password,
 
                                                               host=host)
-                
+                Database.query("DROP DATABASE CPPPM;")
                 Database.query("CREATE DATABASE IF NOT EXISTS cpppm;")
                 Database.query("USE cpppm;")
 

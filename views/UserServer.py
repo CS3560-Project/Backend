@@ -16,6 +16,7 @@ class UserServer(MethodView):
         except MissingArgumentException as e:
             return jsonify({"error":e.message}),e.error_code
         serverID = CourseSection.getCourseSection(data["courseName"],data["sectionID"])
-        US.createUserServer(serverID,data.get("userID"))
+        print(serverID[0][0])
+        # US.createUserServer(serverID,data.get("userID"))
         return jsonify({"status":"created"}),200
         
