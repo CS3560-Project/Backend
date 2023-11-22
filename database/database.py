@@ -70,7 +70,7 @@ class Database:
                         FOREIGN KEY (serverID) REFERENCES ClassServer(serverID) ON DELETE CASCADE
                     );
                 """)
-                
+
                 Database.query("""
                     CREATE TABLE IF NOT EXISTS Message(
                         messageID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -85,7 +85,7 @@ class Database:
                         
                     );
                 """)
-                
+
                 Database.query("""
                     CREATE TABLE IF NOT EXISTS MessageImage(
                         messageID INT NOT NULL,
@@ -125,7 +125,7 @@ class Database:
 
                     );
                     """)
-
+                
                 imageID = Database.query(
                     """
                 INSERT INTO IMAGE(image,imageType)
@@ -144,6 +144,11 @@ class Database:
                     ("Bob", "bob@gmail.com", "password", imageID),
                     getID=True
                 )
+
+Database.query("""
+    
+""")
+
             except Error as e:
                 print(e)
 
@@ -164,15 +169,16 @@ class Database:
             Use fetchVal if you want to geet the result
             use getID to get the previous value id of the insert
         """
-        cursor = cls.__instance.cursor(dictionary=isDictionary, buffered=True)
-        cursor.execute(querys, params=data, multi=isMulti)
-        value = None
-        if fetchVal:
+        with cls.__instance.cursor(dictionary=isDictionary, buffered=True)as cursor:
+        
+            cursor.execute(querys, params=data, multi=isMulti)
+            value = None
+            if fetchVal:
+                
+                value = cursor.fetchall()
+            if getID:
+                value = cursor.lastrowid
             
-            value = cursor.fetchall()
-        if getID:
-            value = cursor.lastrowid
-        cursor.close()
         Database.__instance.commit()
         return value
 

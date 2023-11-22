@@ -14,17 +14,11 @@ class ClassServerDB:
         return value
 
     @staticmethod
-    def getClassServer(serverID):
-        value = Database.query(
-            """
-            SELECT * FROM ClassServer WHERE serverID = %s;
-            """,
-            (serverID,),
-            isDictionary=True,
-            fetchVal=True
-        )
-        print(type(value[0]))
-        print(value)
-        return value[0]
+    def getClassServer(serverIDs):
+        placeholders = ', '.join(['%s'] * len(serverIDs))
+        sql = f"SELECT * FROM ClassServer WHERE serverID IN ({placeholders})"
+        values = Database.query(sql, list(serverIDs), isDictionary=True, fetchVal=True)
+        return values
+    
     
         
