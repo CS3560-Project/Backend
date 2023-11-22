@@ -95,21 +95,15 @@ class Database:
                         FOREIGN KEY (imageID) REFERENCES Image(imageID) ON DELETE CASCADE
                     );
                 """)
-                Database.query("""
-                    CREATE TABLE IF NOT EXISTS Course(
-                        courseId varchar(10) NOT NULL,
-                        courseName varchar(255) NOT NULL,
-                        PRIMARY KEY (courseId)
-                    );
-                """)
+                
                 Database.query("""
                     CREATE TABLE IF NOT EXISTS CourseSection(
                         sectionId INT NOT NULL,
-                        courseId varchar(10) NOT NULL,
-                        classCapacity INT NOT NULL,
-                        instructorName varchar(255) NOT NULL,
-                        PRIMARY KEY (courseId, sectionId),
-                        FOREIGN KEY (courseId) REFERENCES COURSE(courseId) ON DELETE CASCADE
+                        courseName varchar(255) NOT NULL,
+                        serverID INT NOT NULL,
+                        PRIMARY KEY (courseName, sectionId),
+                        
+                        FOREIGN KEY (serverID) REFERENCES classServer(serverID) ON DELETE CASCADE
                     );
                 """)
                 Database.query(

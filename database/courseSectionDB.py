@@ -4,26 +4,26 @@ class CourseSection():
     # implement crud operation here
     
     @staticmethod
-    def createCourseSection(courseId, sectionId, classCapacity, instructorName):
+    def createCourseSection(courseName, sectionId, serverID):
         # print(cls.instance)
         value = Database.query(
             """
-            INSERT INTO CourseSection(courseId, sectionId, classCapacity, instructorName)
-            VALUES (%s,%s,%s,%s)
+            INSERT INTO CourseSection(courseName, sectionId,serverID)
+            VALUES (%s,%s,%s)
             """,
-            (courseId, sectionId, classCapacity, instructorName),
-            getID = True
+            (courseName, sectionId,serverID),
+            
             )
-        return value
+        
     
     @staticmethod
-    def getCourseSection(courseId="", sectionId = 0):
+    def getCourseSection(courseName, sectionId):
         value = Database.query(
             """
-            SELECT * FROM CourseSection where courseId = %s AND sectionId = %s;
+            SELECT serverID FROM CourseSection where courseName = %s AND sectionId = %s;
             """,
-            (courseId, sectionId),
-            isDictionary=True,
+            (courseName, sectionId),
+            
             fetchVal = True
         )
         return value
