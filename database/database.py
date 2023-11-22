@@ -95,7 +95,7 @@ class Database:
                         FOREIGN KEY (imageID) REFERENCES Image(imageID) ON DELETE CASCADE
                     );
                 """)
-                
+
                 Database.query("""
                     CREATE TABLE IF NOT EXISTS CourseSection(
                         sectionId INT NOT NULL,
@@ -119,6 +119,8 @@ class Database:
 
                     );
                     """)
+                
+                
 
                 # Database.query(
                 #     """
@@ -139,29 +141,37 @@ class Database:
                 #     """,
                 #     ("CS3010",))
                 # Database.query(
-                # """
+                #     """
                 # INSERT INTO UserServers(serverID, userID)
                 # VALUES (%s,%s)
                 # """,
-                # (1, 1),
-                # getID = True
+                #     (1, 1),
+                #     getID=True
                 # )
                 # Database.query(
-                # """
+                #     """
                 # INSERT INTO UserServers(serverID, userID)
                 # VALUES (%s,%s)
                 # """,
-                # (2, 1),
-                # getID = True
+                #     (2, 1),
+                #     getID=True
                 # )
                 # Database.query(
-                # """
+                #     """
                 # INSERT INTO UserServers(serverID, userID)
                 # VALUES (%s,%s)
                 # """,
-                # (3, 1),
-                # getID = True
+                #     (3, 1),
+                #     getID=True
                 # )
+                # Database.query("""
+                #     INSERT INTO `channel` (`channelId`, `channelName`, `serverID`) VALUES
+                #     (1, 'channel', 1);
+                #                 """)
+                # Database.query("""
+                #     INSERT INTO `channel` (`channelId`, `channelName`, `serverID`) VALUES
+                #     (2, 'channel1', 2);
+                #                 """)
             except Error as e:
                 print(e)
 
