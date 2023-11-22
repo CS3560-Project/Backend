@@ -106,8 +106,7 @@ class Database:
                     CREATE TABLE IF NOT EXISTS CourseSection(
                         sectionId INT NOT NULL,
                         courseId varchar(10) NOT NULL,
-                        classCapacity INT NOT NULL,
-                        instructorName varchar(255) NOT NULL,
+
                         PRIMARY KEY (courseId, sectionId),
                         FOREIGN KEY (courseId) REFERENCES COURSE(courseId) ON DELETE CASCADE
                     );

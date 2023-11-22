@@ -46,7 +46,9 @@ class Message():
         # test this
         messages = Database.query(
             """
-                SELECT * FROM message where messageID in (
+                SELECT User.userName,message.* FROM Message 
+                INNER JOIN User ON User.userID = Message.userID
+                where messageID in (
                     SELECT messageID FROM ServerMessage where channelID = %s
                 )
             """,

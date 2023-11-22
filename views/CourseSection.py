@@ -29,9 +29,9 @@ class CourseSection(MethodView):
 
 
     def get(self):
-        course = request.args.get("courseId")
+        course = request.args.get("courseName")
         section = request.args.get("sectionId")
-        db_val = Section.getCourseSection(courseId=course, sectionId=section)[0]
+        db_val = Section.getCourseSection(COURSE=course, sectionId=section)[0]
 
 
         return jsonify({

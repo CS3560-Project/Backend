@@ -15,16 +15,20 @@ class ClassServerDB:
 
     @staticmethod
     def getClassServer(serverID):
+        # print(serverID)
+        
+        # serverIDs = tuple(serverID.split(","))
+        # print(serverIDs)
         value = Database.query(
             """
-            SELECT * FROM ClassServer WHERE serverID = %s;
+            SELECT * FROM ClassServer WHERE serverID in (%s);
             """,
             (serverID,),
             isDictionary=True,
             fetchVal=True
         )
-        print(type(value[0]))
-        print(value)
-        return value[0]
+        
+        return value
+    
     
         
