@@ -25,7 +25,7 @@ class Database:
                                                               password=password,
 
                                                               host=host)
-                Database.query("DROP DATABASE CPPPM;")
+                # Database.query("DROP DATABASE cpppm;")
                 Database.query("CREATE DATABASE IF NOT EXISTS cpppm;")
                 Database.query("USE cpppm;")
 
@@ -119,6 +119,49 @@ class Database:
 
                     );
                     """)
+
+                # Database.query(
+                #     """
+                #     INSERT INTO ClassServer(serverName)
+                #     VALUES (%s)
+                #     """,
+                #     ("CS2400",))
+                # Database.query(
+                #     """
+                #     INSERT INTO ClassServer(serverName)
+                #     VALUES (%s)
+                #     """,
+                #     ("CS2250",))
+                # Database.query(
+                #     """
+                #     INSERT INTO ClassServer(serverName)
+                #     VALUES (%s)
+                #     """,
+                #     ("CS3010",))
+                # Database.query(
+                # """
+                # INSERT INTO UserServers(serverID, userID)
+                # VALUES (%s,%s)
+                # """,
+                # (1, 1),
+                # getID = True
+                # )
+                # Database.query(
+                # """
+                # INSERT INTO UserServers(serverID, userID)
+                # VALUES (%s,%s)
+                # """,
+                # (2, 1),
+                # getID = True
+                # )
+                # Database.query(
+                # """
+                # INSERT INTO UserServers(serverID, userID)
+                # VALUES (%s,%s)
+                # """,
+                # (3, 1),
+                # getID = True
+                # )
             except Error as e:
                 print(e)
 

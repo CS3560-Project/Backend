@@ -60,14 +60,17 @@ class ClassServer(MethodView):
         server = ClassServerDB.getClassServer(server_id)
 
         if server:
-            all_channels = Channel.get_channel_from_server(server["serverID"])
-            all_userID = UserServer.getUserOfServer(server_id)
-            all_userID = [i[0] for i in all_userID]
-            return jsonify({
-                "serverName": server["serverName"],
-                "serverID": server["serverID"],
-                "channels": all_channels,
-                "userIDs":all_userID
-            })
+            finalData = []
+            for data in server:
+                all_channels = Channel.get_channel_from_server(data["serverID"])
+                all_userID = UserServer.getUserOfServer(data["serverID"])
+                all_userID = [i[0] for i in all_userID]
+                finalData.append({
+                    "serverName": data["serverName"],
+                    "serverID": data["serverID"],
+                    "channels": all_channels,
+                    "userIDs":all_userID
+                })
+            return jsonify(finalData), 200  
         else:
             return jsonify({"error": "ClassServer not found"}), 404

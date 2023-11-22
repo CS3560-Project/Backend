@@ -1,5 +1,6 @@
 from .database import Database
 
+
 class ClassServerDB:
 
     @staticmethod
@@ -9,37 +10,13 @@ class ClassServerDB:
             INSERT INTO ClassServer(serverName)
             VALUES (%s)
         """,
-        (serverName,),
-        getID=True)
+                               (serverName,),
+                               getID=True)
         return value
 
     @staticmethod
-    def getClassServer(serverID):
-        # print(serverID)
-        
-        # serverIDs = tuple(serverID.split(","))
-        # print(serverIDs)
-        value = Database.query(
-            """
-            SELECT * FROM ClassServer WHERE serverID in (%s);
-            """,
-            (serverID,),
-            isDictionary=True,
-            fetchVal=True
-        )
-        print(type(value[0]))
-        print(value)
-        return value[0]
-    @staticmethod
-    def getServerByName(serverName):
-        value = Database.query(
-            """
-            SELECT * FROM ClassServer WHERE serverName = %s;
-            """,
-            (serverName,),
-            
-            fetchVal=True
-        )
-        
-        return value
-        
+    def getClassServer(serverIDs):
+        serverPlaceholders = ', '.join(['%s'] * len(serverIDs))
+        allServers = Database.query(f"SELECT * FROM ClassServer WHERE serverID IN ({serverPlaceholders})", list(
+            serverIDs), isDictionary=True, fetchVal=True)
+        return allServers
