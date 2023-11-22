@@ -27,8 +27,19 @@ class ClassServerDB:
             isDictionary=True,
             fetchVal=True
         )
+        print(type(value[0]))
+        print(value)
+        return value[0]
+    @staticmethod
+    def getServerByName(serverName):
+        value = Database.query(
+            """
+            SELECT * FROM ClassServer WHERE serverName = %s;
+            """,
+            (serverName,),
+            
+            fetchVal=True
+        )
         
         return value
-    
-    
         

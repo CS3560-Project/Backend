@@ -11,6 +11,8 @@ from flask_socketio import SocketIO
 from views.CourseSection import CourseSection
 from views.Message import Message_endpoint
 from views.UserServer import UserServer
+from views.Course import Course
+
 from flask_cors import CORS
 
 import json
@@ -50,8 +52,7 @@ classServer
 post: take an server name and spits out a server with  3 channels predefined
 import thing to note is it returns the serverID which shoudl be stored
 get: takes a serverID and rerieves the serverNaame,ID all channels and all users associated wit it
-
- """
+"""
 app.add_url_rule('/classserver/',view_func = ClassServer.as_view('classserver'))
 
 # use this get endpoint to get all messages associated witha  sepcifc channel oif a server
@@ -65,3 +66,7 @@ app.add_url_rule('/courseSection/',view_func = CourseSection.as_view('coursectio
 socketio.on_namespace(Message("/message"))
 
 
+# use this post endpoint to join users with servers
+app.add_url_rule('/course/',view_func = Course.as_view('course'))
+
+app.add_url_rule("/courseSection",view_func = CourseSection.as_view("courseSection"))
