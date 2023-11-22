@@ -74,3 +74,14 @@ class ClassServer(MethodView):
             return jsonify(finalData), 200  
         else:
             return jsonify({"error": "ClassServer not found"}), 404
+
+
+    def delete(self):
+
+        server_id = request.args.get("serverID")
+
+        if not server_id:
+            return jsonify({"error": "Missing required parameter 'serverID'"}), 400
+
+        server = ClassServerDB.deleteClassServer(server_id)
+        return jsonify({"status":"dropped successfully"}),200

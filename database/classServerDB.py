@@ -20,3 +20,7 @@ class ClassServerDB:
         allServers = Database.query(f"SELECT * FROM ClassServer WHERE serverID IN ({serverPlaceholders})", list(
             serverIDs), isDictionary=True, fetchVal=True)
         return allServers
+
+    @staticmethod
+    def deleteClassServer(serverID):
+        Database.query("DELETE FROM ClassServer WHERE serverID = %s",(serverID,))
